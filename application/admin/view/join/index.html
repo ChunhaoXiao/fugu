@@ -1,0 +1,51 @@
+{extend name="common/list" /}
+{block name="search"}
+	<form class="layui-form layui-col-space5" action="{:url('admin/join/index')}">
+        <div class="layui-inline layui-show-xs-block">
+            <input class="layui-input" placeholder="姓名" name="name" value="{:request()->name??''}">
+        </div>
+        <div class="layui-inline layui-show-xs-block">
+            <input class="layui-input"  autocomplete="off"  name="phone" placeholder="电话" value="{:request()->phone??''}">
+        </div>
+        <div class="layui-inline layui-show-xs-block">
+            <input class="layui-input"  autocomplete="off"  name="email" placeholder="email" value="{:request()->email??''}">
+        </div>
+        <div class="layui-inline layui-show-xs-block">
+            <input class="layui-input"  autocomplete="off"  name="wechat" placeholder="微信号" value="{:request()->wechat??''}">
+        </div>
+        <!-- <div class="layui-inline layui-show-xs-block">
+            <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
+        </div> -->
+        <div class="layui-inline layui-show-xs-block">
+            <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </div>
+    </form>
+{/block}
+
+{block name="content"}
+	<table class="layui-table layui-form">
+		<thead>
+			<th>名字</th>
+			<th>电话</th>
+			<th>邮箱</th>
+			<th>微信号</th>
+			<th width="40%">留言</th>
+
+			
+			<th></th>
+		</thead>
+		<tbody>
+			{foreach $datas as $k => $v}
+				<tr>
+					<td>{$v->name}</td>
+					<td>{$v->phone??''}</td>
+					<td>{$v->email??''}</td>
+					<td>{$v->wechat??''}</td>
+					<td>{$v->message}</td>
+					<td></td>
+				</tr>
+			{/foreach}
+		</tbody>
+	</table>
+	<p>{$datas|raw}</p>
+{/block}

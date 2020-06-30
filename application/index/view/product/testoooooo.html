@@ -1,0 +1,157 @@
+{extend name="layout"}
+{block name="content"}
+ <!-- <style type="text/css">
+*{margin:0;padding:0;list-style-type:none;}
+a,img{border:0;}
+.demo{width:900px;margin:20px auto;}
+.demo h1{font-size:18px;height:28px;font-weight:normal;color:#3366cc;text-align:center;}
+.demo h1 small{font-size:12px;font-style:normal;color:#5e5e5e;margin:0 0 0 20px;}
+
+.thickdiv{display:none;position:fixed;top:0;left:0;z-index:10000001;width:100%;height:100%;background:#000;border:0;filter:alpha(opacity=15);opacity:.15;}
+.thickbox{display:none;position:fixed;top:0;left:50%;z-index:10000002;overflow:hidden;padding:0 4px 4px 0;background:url(images/bg_shadow.gif) no-repeat -4px 0;margin-left:-175px;margin-top:180px;}
+*html,*html body{background-image:url(about:blank);background-attachment:fixed;}
+*html .thickbox{position:absolute;top:expression(eval(document.documentElement.scrollTop));}
+.thicktitle{height:27px;padding:0 10px;border:solid #C4C4C4;border-width:1px 1px 0;background:#F3F3F3;line-height:27px;font-family:arial;font-size:14px;font-weight:bold;color:#333;}
+.thickclose:link,.thickclose:visited{display:block;position:absolute;z-index:100000;top:7px;right:12px;overflow:hidden;width:15px;height:15px;background:url(images/bg_thickbox.gif) no-repeat 0 -18px;font-size:0;line-height:100px;}
+.thickcon{overflow:auto;background:#fff;border:solid #C4C4C4;border-width:1px;padding:10px;}
+*html .thickdiv{position:absolute;}
+/*preview*/
+#preview{width:876px;height:564px;margin:10px auto;border:1px solid #e6e6e6;padding:5px;zoom:1;overflow:hidden;}
+#spec-n1{float:left;width:720px;height:540px;border:1px solid #e6e6e6;overflow:hidden;background:#f6f6f6;position:relative;z-index:5;zoom:1;}
+#spec-n1 .o-img{width:720px;height:540px;text-align:center;}
+#spec-n1 .switch{width:720px;height:540px;position:absolute;z-index:10;top:0;left:0;}
+#spec-n1 img{max-width:720px;max-height:540px;_height:384px;}
+#spec-n5{position:relative;float:right;width:134px;height:490px;padding:25px 0px;zoom:1}
+#spec-list{width:134px;height:490px;overflow:hidden;}
+#spec-list ul{height:490px;overflow:hidden;margin:0;}
+#spec-list li{width:134px;height:125px;text-align:center;}
+#spec-list img{padding:2px;border:1px solid #E8E8E8;}
+#spec-list .curr img{padding:1px;border:2px solid #ffd300;}
+#spec-n5 .control{position:absolute;width:134px;height:25px;background-repeat:no-repeat;cursor:pointer;}
+
+#spec-top{top:-2px;background:url(images/icoin.png) 0 -30px;}
+#spec-top.disabled{background-position:-85px -124px;}
+#spec-bottom{bottom:-2px;background:url(images/icoin.png) -139px -30px;}
+#spec-bottom.disabled{background-position:-139px -61px;}
+
+
+#intro{float:left;width:720px;height:25px;line-height:25px;text-align:center;overflow:hidden;font-size:12px;}
+#foward{display:block;width:360px;height:540px;float:left;cursor:url(images/foward.ico),pointer;background:#fff;filter:alpha(opacity=0);-moz-opacity:0;opacity:0;}
+#foward.disabled,#next.disabled{cursor:default;}
+#next{display:block;width:360px;height:540px;float:right;cursor:url(images/next.ico),pointer;background:#fff;filter:alpha(opacity=0);-moz-opacity:0;opacity:0;}
+.thickcon{line-height:40px;text-align:center}
+</style> -->
+<div class="banner_gy banner_cpzx" style="background-image: url(/uploads/{:cache('banner')['product']})">
+	<div class="logo2"><img src="/uploads/{:cache('config')['logo']}" alt=""></div>
+	<div class="bangywzhi">
+		<h3>产品中心</h3>
+		<p>product center</p>
+	</div>
+</div>
+
+<div class="Gyuscenter">
+		<div class="Mainbnav">   
+			<div class="inner">
+				<a href="{:url('index/index/index')}">{:lang('index')}></a>
+				<a href="{:url('index/product/index')}">{:lang('product')}></a>
+				<a href="javascript:;">{$data->lang_name}</a>
+			</div>
+		</div>
+		<div class="Gyfullpages">
+			<div class="inner clearfix">
+
+				<div class="Gstitle_bar">
+					<div class="Gstitle active">
+						<div class="Titlebars active"><h3 class="">{:lang('product')}</h3></div>
+					</div>
+				</div>
+
+				<div class="Gslistnav Gslistnav_1 clearfix">
+						<ul>
+							<li class="{:empty(request()->category_id)? 'active' : ''}"><a href="{:url('product/index')}">{:lang('all_product')}</a></li>
+							{foreach $cates as $v}
+								<li class="{:request()->category_id == $v->id? 'active':''}"><a href="{:url('index/product/index', ['category_id' => $v->id])}">{$v->lang}</a></li>
+							{/foreach}
+							<!-- <li><a href="###">活品＆鲜品</a></li>
+							<li><a href="###">冻品</a></li>
+							<li><a href="###">制品</a></li>
+							<li><a href="###">休闲食品</a></li>
+							<li><a href="###">海参系列</a></li> -->
+						</ul>
+					</div>
+					{if $data->album}
+				<div id="preview" class="preview" style="padding-top: 50px">
+
+				
+					<div id="spec-n1" class="spec-n1">
+						<div class="o-img">
+							<img alt="" src="/uploads/{$data->album[0]}"/>
+						</div>
+						<div class="switch">
+							<a id="foward">&nbsp;</a>
+							<a id="next">&nbsp;</a>
+						</div>													
+					</div><!--spec-n1 end-->
+
+
+					
+					<div id="spec-n5" class="spec-n5">
+						<!-- <div id="spec-top" class="control disabled spec-top"></div> -->
+						<div id="spec-top" class="control">
+							<!-- <img src="/front/images/up.png"> -->
+							︿
+						</div>
+						<!-- <div id="spec-bottom" class="control spec-bottom"></div> -->
+
+						<div id="spec-list" class="spec-list">
+							<ul style="width: 100%">
+								{foreach $data->album as $v}
+								  <li style="width: 100%"><img src="/uploads/{$v}"></li>
+								{/foreach}
+								<!--class="curr"-->
+								<!-- <li><img width="128" height="96" name="images/s128x96_DV33SrtGF0EkrA3F.JPG" alt="±öµÃ£¨PENTAX£© K-5£¨DA 18-55mm F3.5-5.6 AL WR£© µ¥·´Ì×»ú£¨ºÚÉ«£©"  title="°×ÔÆÖ®ÉÏ" src="images/s128x96_DV33SrtGF0EkrA3F.JPG"/></li>
+								
+								<li><img width="128" height="96" name="images/s128x96_boiCqhjGmojNGguS.JPG" alt="±öµÃ£¨PENTAX£© K-5£¨DA 18-55mm F3.5-5.6 AL WR£© µ¥·´Ì×»ú£¨ºÚÉ«£©"  title="´ó¶«º£Ï¼¹â" src="images/s128x96_boiCqhjGmojNGguS.JPG"/></li>
+								
+								<li><img width="128" height="96" name="images/s128x96_Gpsv0Kx15IEcJi7E.JPG" alt="±öµÃ£¨PENTAX£© K-5£¨DA 18-55mm F3.5-5.6 AL WR£© µ¥·´Ì×»ú£¨ºÚÉ«£©"  title="»ÊºóÍåÇ³Ì²" src="images/s128x96_Gpsv0Kx15IEcJi7E.JPG"/></li>
+								
+								<li><img width="128" height="96" name="images/s128x96_Jku0EImlopNsh65J.JPG" alt="±öµÃ£¨PENTAX£© K-5£¨DA 18-55mm F3.5-5.6 AL WR£© µ¥·´Ì×»ú£¨ºÚÉ«£©"  title="ÏãË®ÍåÌ²Í·" src="images/s128x96_Jku0EImlopNsh65J.JPG"/></li>	 -->											
+							</ul>
+						</div>
+						<div id="spec-bottom" class="control spec-bottom" style="margin-top: 3px">
+							<!-- <img src="/front/images/down.png"> -->
+							﹀
+						</div>
+					</div><!--spec-n5 end-->
+
+
+					<div id="intro"></div>
+				</div> {/if}
+
+				<div class="product-description">
+
+						<div class="product-title-container">
+							<div class="">
+								<div style="font-size: 25px">{$data->lang_name}</div>
+								<div style="height: 15px; border-bottom: 5px solid #002f5a"></div>
+							</div>
+
+						    <div style="height: 25px; border-bottom:1px solid #002f5a;flex: 1; align-self: flex-end;margin-bottom: 2px">
+						    </div>
+					    </div>
+
+
+						<div class="product-text">
+							{$data->lang_con|raw}
+						</div>
+				</div>
+				
+			</div>
+		</div>	
+</div>
+{/block}
+
+
+{block name="script"}
+	<script type="text/javascript" src="/front/script/zzsc.js"></script>
+{/block}

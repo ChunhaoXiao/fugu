@@ -1,0 +1,128 @@
+{extend name="layout"} {block name="content"}
+
+<div class="banner_gy banner_rl" style="background-image: url(/uploads/{:cache('banner')['hr']})">
+    <div class="logo2"><img src="/uploads/{:cache('config')['logo']}" alt=""></div>
+    <div class="bangywzhi">
+        <h3>人力资源</h3>
+        <p>human resources</p>
+    </div>
+</div>
+
+<div class="Gyuscenter">
+    <div class="Mainbnav">
+        <div class="inner">
+            <a href="{:url('index/index/index')}">{:lang('index')}></a>
+            <a href="{:url('index/hr/index')}">{:lang('human_resource')}></a>
+            <a href="javascript:;" id="nav_text">{:lang('hr_idea')}</a>
+        </div>
+    </div>
+
+    <div class="Gyfullpages">
+        <div class="inner clearfix">
+            <div class="Gstitle_bar">
+                <div class="Gstitle active">
+                    <div class="Titlebars">
+                        <p class="lfish"><img src="/assets/images/left_fish.png"></p>
+                        <h3 class="">{:lang('hr_idea')}</h3>
+                        <p class="rfish"><img src="/assets/images/right_fish.png"></p>
+                    </div>
+                </div>
+                <div class="Gstitle">
+                    <div class="Titlebars">
+                        <h3>{:lang('recruit')}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="Gslistnav_pr">
+                <div class="Gslistnav Gslistnav_1 clearfix">
+                    <ul style="display: flex; justify-content: center;">
+                        <li class="active">
+                            <a href="javascript:;">{:lang('hr_idea')}</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">{:lang('recruit')}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="Gslistnav_huan">
+
+                    <!-- 1 人才理念 -->
+                    <div class="Gslistnav_items active clearfix">
+                        <div class="Gsjieahso_1">
+                            <h3>{:lang('hr_philosophy')}</h3>
+                        </div>
+                        <div class="Gscenters clearfix">
+                            <div class="Gsrenbar"><img src="/uploads/{:cache('config')['hr_picture']}" alt=""></div>
+                            <div class="gsrenlist clearfix">
+                                <ul>
+
+                                    {foreach $rules as $k => $v}
+                                    <li>
+                                        <span>{$k + 1}</span> {:strip_tags($v->lang_con)}
+                                    </li>
+                                    {/foreach}
+                                    <!-- <li>
+										<span>2</span>
+										<p>二基点：既要用人之力，更要用人之智 </p>
+									</li>
+									<li>
+										<span>3</span>
+										<p>三部曲：信任、约束、成长 </p>
+									</li> -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2 招贤纳士  -->
+                    <div class="Gslistnav_items clearfix">
+                        {foreach $recruitments as $v}
+                        <div class="Zhaopbasr">
+                            <h3>{$v->lang_name}</h3>
+                            <p>{:lang('job_quantity')}：{$v->quantity}</p>
+                            <p>{:lang('job_location')}：{$v->lang_location}</p>
+                            <p>{:lang('salary')}：{$v->lang_salary}</p>
+                            <p>{:lang('job_requirement')}：</p>
+                            {$v->lang_content|raw}
+                        </div>
+                        {/foreach}
+                        <!-- <div class="Zhaopbasr">
+							<h3>市场部策划1名 </h3>
+							<p>相关要求：</p>
+							<p>1、大专以上学历，平面设计或美术相关专业，两年以上工作经验，精通Photoshop、cordraw等相关设计软件，对包装设计有独到的见解和较高超的设计能力；</p>
+							<p>2、具有较强品牌战略和市场管理理念；</p>
+							<p>3、熟悉印刷品及包装制作基本流程。</p>
+							<p>4、工作地点（庄河），薪资待遇面议  电话：0411-89370897</p>
+						</div>
+						<div class="Zhaopbasr">
+							<h3>专卖店营业员若干名 </h3>
+							<p>相关要求：</p>
+							<p>工作职责：</p>
+							<p>1、专卖店日常管理，与客户良好沟通，提供优质服务 </p>
+							<p>2、通过对产品的特性和顾客的需求分析能对顾客进行引导性销售，并能维护好客户关系</p>
+							<p>3、接听电话，与顾客沟通解决疑问介绍公司产品，达成交易。</p>
+							<p>任职资格:</p>
+							<p>1、20-40岁之间，普通话流利；</p>
+							<p>2、电脑基本操作，中专以上学历优先，对销售工作有较高的热情；</p>
+							<p>3、具备较强的学习能力和优秀的沟通能力；</p>
+							<p>4、性格坚韧，思维敏捷，具备良好的应变能力和承压能力；</p>
+							<p>5、有责任心和积极的工作态度，有相关销售工作经验者优先；</p>
+							<p>工作地点（庄河），薪资待遇面议  电话：0411-89370897</p>
+						</div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block} {block name="script"}
+<script type="text/javascript">
+    $(function() {
+        $(".Gslistnav li").on('click', function() {
+            let text = $(this).find('a').text();
+            $("#nav_text").text(text);
+        })
+    })
+</script>
+{/block}

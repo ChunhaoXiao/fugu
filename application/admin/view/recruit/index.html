@@ -1,0 +1,36 @@
+{extend name="common/list" /}
+{block name="action"}
+	<button class="layui-btn" onclick="xadmin.open('添加栏目','/admin/recruit/create',600,400)"><i class="layui-icon"></i>添加</button>
+{/block}
+{block name="content"}
+	<table class="layui-table layui-form">
+		<thead>
+			<tr>
+				<th>职位名称</th>
+				<th>招聘人数</th>
+				<th>薪资</th>
+				<th>创建时间</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{foreach $datas as $v}
+				<tr>
+					<td>{$v->name}</td>
+					<td>{$v->quantity}</td>
+					<td>{$v->salary}</td>
+					<td>{$v->create_time}</td>
+					<td>
+						<a title="编辑"  onclick="xadmin.open('修改','/admin/recruit/edit?id={$v->id}',600,400)" href="javascript:;">
+                        <i class="layui-icon">&#xe642;</i>
+                        </a>
+                        	&nbsp;&nbsp;&nbsp;
+                        <a title="删除" onclick="del(this)" href="javascript:;" data-url="{:url('admin/recruit/delete', ['id' => $v->id])}">
+                          <i class="layui-icon">&#xe640;</i>
+                        </a>
+					</td>
+				</tr>
+			{/foreach}
+		</tbody>
+	</table>
+{/block}

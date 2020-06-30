@@ -1,0 +1,29 @@
+{extend name="common/form"}
+
+{block name="content"}
+
+	<form class="layui-form" action="{:url('admin/lang/save')}" method="post">
+
+    {foreach $datas as $k => $item}
+		<div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="">{$item->zh_name}</span>
+      </label>
+      <div class="layui-input-block">
+        <input type="text" name="{$item->key_name}" class="layui-input" value="{$item->en_name??''}">
+      </div>
+    </div>
+    {/foreach}
+
+
+    <div class="layui-form-item">
+        <label for="L_repass" class="layui-form-label"></label>
+        <button class="layui-btn"  type="submit">确定</button>
+        {if !empty(session('success'))} 
+          <span style="color:green">
+            操作成功
+          </span>
+        {/if}
+    </div>
+	</form>
+{/block}

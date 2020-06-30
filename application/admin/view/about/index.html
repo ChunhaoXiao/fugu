@@ -1,0 +1,31 @@
+{extend name="common/list" /}
+{block name="action"}
+	<button class="layui-btn" onclick="xadmin.open('添加栏目','/admin/about/create',800,600)"><i class="layui-icon"></i>添加</button>
+{/block}
+
+{block name="content"}
+	<table class="layui-table layui-form">
+		<thead>
+			<th>栏目</th>
+			<th>修改时间</th>
+			<th>排序</th>
+			<th></th>
+			
+		</thead>
+		<tbody>
+			{foreach $datas as $v}
+				<tr>
+					<td>{$v->name}</td>
+					<td>{$v->aboutus->update_time??'暂无内容'}</td>
+					<td>{$v->order}</td>
+					
+					<td>
+						<a title="编辑"  onclick="xadmin.open('修改内容','/admin/about/edit?id={$v->id}',600,400)" href="javascript:;">
+                        <i class="layui-icon">&#xe642;</i>
+                        </a>
+					</td>
+				</tr>
+			{/foreach}
+		</tbody>
+	</table>
+{/block}

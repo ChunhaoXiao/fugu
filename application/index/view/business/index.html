@@ -1,0 +1,166 @@
+{extend name="layout"} {block name="content"} {php} $index = request()->i??0; {/php}
+<div class="banner_gy banner_cy" style="background-image: url(/uploads/{:cache('banner')['business']})">
+    <div class="logo2"><img src="/uploads/{:cache('config')['logo']}" alt=""></div>
+    <div class="bangywzhi">
+        <h3>主要产业</h3>
+        <p>Main industries</p>
+    </div>
+</div>
+
+<div class="Gyuscenter">
+    <div class="Mainbnav">
+        <div class="inner">
+            <a href="{:url('index/index/index')}">{:lang('index')}></a>
+            <a href="{:url('index/business/index')}">{:lang('business')}></a>
+            <a href="javascript:;" id="nav_text">{$datas->subcates[$index]->lang}</a>
+        </div>
+    </div>
+    <div class="Gyfullpages">
+        <div class="inner clearfix">
+            <div class="Gstitle_bar">
+                {foreach $datas->subcates as $k => $v}
+                <div class="Gstitle {if $k == $index} active {/if}">
+                    <div class="Titlebars">
+                        <p class="lfish"><img src="/assets/images/left_fish.png"></p>
+                        <h3 {if mb_strlen($v->lang) > 4} class="xd" {/if}> {$v->lang}</h3>
+                        <p class="rfish"><img src="/assets/images/right_fish.png"></p>
+                    </div>
+                </div>
+                {/foreach}
+                <!-- <div class="Gstitle active">
+					<div class="Titlebars"><h3 class="xd">现代化渔业园区</h3></div>
+				</div>
+				<div class="Gstitle">
+					<div class="Titlebars"><h3>海洋牧场</h3></div>
+				</div>
+				<div class="Gstitle">
+					<div class="Titlebars"><h3>水产品加工</h3></div>
+				</div>
+				<div class="Gstitle">
+					<div class="Titlebars"><h3>冷链物流</h3></div>
+				</div>
+				<div class="Gstitle">
+					<div class="Titlebars"><h3 class="xd">休闲渔业＆酒店</h3></div>
+				</div>
+				<div class="Gstitle">
+					<div class="Titlebars"><h3>科技研发</h3></div>
+				</div> -->
+            </div>
+
+            <div class="Gslistnav_pr">
+                <div class="Gslistnav Gslistnav_1 clearfix">
+                    <ul>
+                        {foreach $datas->subcates as $k => $v}
+                        <li {if $k==$index} class="active" {/if}><a href="javascript:;">{$v->lang}</a></li>
+                        <!-- <li class="active"><a href="###">现代化渔业园区</a></li>
+						<li><a href="###">海洋牧场</a></li>
+						<li><a href="###">水产品加工</a></li>
+						<li><a href="###">冷链物流</a></li>
+						<li><a href="###">休闲渔业＆酒店</a></li>
+						<li><a href="###">科技研发</a></li> -->
+                        {/foreach}
+                    </ul>
+                </div>
+                <div class="Gslistnav_huan">
+
+                    <!-- 1 公司介绍 -->
+                    {foreach $datas->subcates as $k => $v}
+                    <div class="Gslistnav_items  clearfix {if $k == $index} active {/if}">
+                        {foreach $v->businesses as $item}
+                        <div class="Yuanqtesx">
+                            {if !empty($item->lang_title)}
+                            <h3>
+                                <span><em class="left"></em>{$item->lang_title}<em class="right"></em></span>
+                            </h3>
+                            {/if}
+                        </div>
+
+                        <div class="yuqimgbar yuqimgbar_1">
+                            {$item->lang_con|raw}
+                        </div>
+                        {/foreach}
+                    </div>
+
+                    <!-- <div class="yuqimgbar yuqimgbar_1"><img src="images/yuqimg_1.jpg" alt=""></div>
+						<div class="Yuanqtesx">
+							<h3><span><em class="left"></em>循环水工艺流程图<em class="right"></em></span></h3>
+						</div>
+						<div class="yuqimgbar yuqimgbar_2"><img src="images/yuqimg_2.jpg" alt=""></div>
+						<div class="Yuanqtesx">
+							<h3><span><em class="left"></em>水产品加工产业化功能区<em class="right"></em></span></h3>
+						</div>
+						<div class="yuqimgbar yuqimgbar_1"><img src="images/yuqimg_3.jpg" alt=""></div>
+						<div class="Yuanqtesx">
+							<h3><span><em class="left"></em>科技研发功能区<em class="right"></em></span></h3>
+						</div>
+						<div class="yuqimgbar yuqimgbar_1"><img src="images/yuqimg_4.jpg" alt=""></div>
+						<div class="Yuanqtesx">
+							<h3><span><em class="left"></em>合作科研院所<em class="right"></em></span></h3>
+						</div>
+						<div class="yuqimgbar yuqimgbar_1"><img src="images/yuqimg_5.jpg" alt=""></div>
+						<div class="Yuanqtesx">
+							<h3><span><em class="left"></em>休闲渔业旅游功能区<em class="right"></em></span></h3>
+						</div>
+						<div class="yuqimgbar yuqimgbar_1"><img src="images/yuqimg_6.jpg" alt=""></div> -->
+                    {/foreach}
+                </div>
+
+
+                <!-- 2 董事长致辞  -->
+                <!-- <div class="Gslistnav_items clearfix">
+						<div class="yuqimgbar yuqimgbar_1"><img src="images/haimg_1.jpg" alt=""></div>
+					</div> -->
+
+                <!-- 3 发展历程  -->
+                <!-- <div class="Gslistnav_items clearfix">
+						<div class="yuqimgbar yuqimgbar_1"><img src="images/jgimg_1.jpg" alt=""></div>
+					</div> -->
+
+                <!-- 4 企业文化  -->
+                <!-- <div class="Gslistnav_items clearfix">
+						<div class="yuqimgbar yuqimgbar_1"><img src="images/wlimg_1.jpg" alt=""></div>
+					</div> -->
+
+                <!-- 5 资质荣誉  -->
+                <!-- <div class="Gslistnav_items clearfix">
+						<div class="Yuanqtesx">
+							<h3><span><em class="left"></em>休闲渔业旅游功能区<em class="right"></em></span></h3>
+						</div>
+						<div class="yuqimgbar yuqimgbar_1"><img src="images/wanimg_1.jpg" alt=""></div>
+						<div class="Yuanqtesx">
+							<h3><span><em class="left"></em>酒店环境<em class="right"></em></span></h3>
+						</div>
+						<div class="yuqimgbar yuqimgbar_1"><img src="images/wanimg_2.jpg" alt=""></div>
+						<div class="Yuanqtesx">
+							<h3><span><em class="left"></em>酒店菜谱<em class="right"></em></span></h3>
+						</div>
+						<div class="yuqimgbar yuqimgbar_1"><img src="images/wanimg_3.jpg" alt=""></div>
+					</div> -->
+
+                <!-- 6 核心价值  -->
+                <!-- <div class="Gslistnav_items clearfix">
+						<div class="Yuanqtesx">
+							<h3><span><em class="left"></em>科技研发功能区<em class="right"></em></span></h3>
+						</div>
+						<div class="yuqimgbar yuqimgbar_1"><img src="images/yfaimg_1.jpg" alt=""></div>
+						<div class="Yuanqtesx">
+							<h3><span><em class="left"></em>合作科研院所<em class="right"></em></span></h3>
+						</div>
+						<div class="yuqimgbar yuqimgbar_1"><img src="images/yfaimg_2.jpg" alt=""></div>
+					</div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{/block} {block name="script"}
+<script type="text/javascript">
+    $(function() {
+        $(".Gslistnav li").on('click', function() {
+            let text = $(this).find('a').text();
+            $("#nav_text").text(text);
+        })
+    })
+</script>
+{/block}

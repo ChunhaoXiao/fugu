@@ -1,0 +1,102 @@
+{extend name="common/form"}
+{block name="content"}
+
+	<form class="layui-form" enctype="multipart/form-data" action="{:empty($data)?url('admin/recruit/save'):url('admin/recruit/update', ['id'=> $data->id])}">
+		<div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="x-red"></span>职位名称
+      </label>
+
+      <div class="layui-input-inline">
+         <input type="text" name="name" class="layui-input" value="{$data->name??''}">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="x-red"></span>英文名称
+      </label>
+
+      <div class="layui-input-inline">
+         <input type="text" name="en_name" class="layui-input" value="{$data->en_name??''}">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="x-red"></span>招聘人数
+      </label>
+
+      <div class="layui-input-inline">
+         <input type="text" name="quantity" class="layui-input" value="{$data->quantity??''}">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="x-red"></span>薪资
+      </label>
+
+      <div class="layui-input-inline">
+         <input type="text" name="salary" class="layui-input" value="{$data->salary??''}">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="x-red"></span>英文薪资
+      </label>
+
+      <div class="layui-input-inline">
+         <input type="text" name="en_salary" class="layui-input" value="{$data->en_salary??''}">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="x-red"></span>工作地点
+      </label>
+
+      <div class="layui-input-inline">
+         <input type="text" name="location" class="layui-input" value="{$data->location??''}">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="x-red"></span>英文地点
+      </label>
+
+      <div class="layui-input-inline">
+         <input type="text" name="en_location" class="layui-input" value="{$data->en_location??''}">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="x-red"></span>工作内容
+      </label>
+
+      <div class="layui-input-block">
+         <textarea id="content">{$data->content??''}</textarea>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="x-red"></span>英文内容
+      </label>
+
+      <div class="layui-input-block">
+         <textarea id="en_content">{$data->en_content??''}</textarea>
+      </div>
+    </div>
+
+
+
+    <div class="layui-form-item">
+        <label for="L_repass" class="layui-form-label"></label>
+        <button class="layui-btn" lay-filter="add" type="button" lay-submit="">增加</button>
+    </div>
+	</form>
+
+{/block}

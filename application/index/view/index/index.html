@@ -1,0 +1,398 @@
+{extend name="layout"} {block name="content"}
+<div class="banner_index">
+    <!-- Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            {foreach :cache('swiper') as $v}
+            <div class="swiper-slide">
+                <a href="###"><img src="/uploads/{$v->path}" alt=""></a>
+            </div>
+            {/foreach}
+        </div>
+    </div>
+</div>
+
+<div class="Indexgyban">
+    <div class="inner">
+        <div class="Titlebars">
+            <p class="lfish"><img src="/assets/images/left_fish.png"></p>
+            <h3><a style="color: #3C6080" href="{:url('index/about/index')}">{:lang('about')}</a></h3>
+            <p class="rfish"><img src="/assets/images/right_fish.png"></p>
+        </div>
+    </div>
+</div>
+
+<div class="Indexgybg" style="background:url(/uploads/{:cache('config')['index_about_bgimg']}) no-repeat top center;">
+    <div class="inner">
+        <div class="IndexGybank">
+            <div class="IndexGytop clearfix">
+
+                <div class="GYvideos">
+                    <!-- <img src="images/Indexgyvd.jpg" alt="">
+						<a class="GYplaybtn" href="###"></a> -->
+                    {$video->aboutus->content|raw}
+                </div>
+
+                <div class="Gyrightbank">
+                    <div class="Gytexts">
+                        <h3 class="xd"><span>{:lang('introduction')}</span></h3>
+                    </div>
+                    <div class="Gytextpagesr" style="padding: 5px; margin:30px 0; line-height: 25px">
+                        {if !empty($intro->aboutus)} {:mb_substr(strip_tags($intro->aboutus->lang_con),0,560)}... {/if}
+
+                    </div>
+                    <div class="GYmoregd"><a href="{:url('index/about/index', ['index' => 0])}">{:lang('detail')}+</a></div>
+                </div>
+            </div>
+
+            <div class="IndexGybotm clearfix">
+                <ul>
+                    <!-- <li class="gysw_1"><a href="###">董事长致辞</a></li>
+						<li class="gysw_2"><a href="###">发展历程</a></li>
+						<li class="gysw_3"><a href="###">企业文化</a></li>
+						<li class="gysw_4"><a href="###">核心价值</a></li>
+						<li class="gysw_5"><a href="###">资质荣誉</a></li> -->
+                    {foreach $about->subcates as $k => $v} {if $v->name != '公司介绍' && $v->name != '企业视频'}
+                    <li class="">
+                        <a href="{:url('index/about/index', ['index' => $k])}">
+										<img src="/uploads/{$v->icon}" class="about-icon">
+										<span>{$v->lang}</span>
+									</a>
+                    </li>
+                    {/if} {/foreach}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="Chanyebar">
+    <div class="inner">
+        <div class="Titlebars">
+            <p class="lfish"><img src="/assets/images/left_fish.png"></p>
+            <h3 class="xd"><a style="color: #3C6080" href="{:url('index/business/index')}">{:lang('business')}</a></h3>
+            <p class="rfish"><img src="/assets/images/right_fish.png"></p>
+        </div>
+    </div>
+
+    <div class="chanyimg clearfix">
+
+        <div class="chanyimg_left">
+            <span><img src="/uploads/{$business[0]['bg_image']}" alt=""></span>
+            <a class="Chancenter" href="{:url('index/business/index', ['i' => 0])}">
+                <p>{$business[0]->lang??''}<em></em></p>
+            </a>
+        </div>
+
+        <div class="chanyimg_right clearfix">
+            <div class="chanyimg_top clearfix">
+                <ul>
+                    <li>
+                        <span><img src="/uploads/{$business[1]['bg_image']}" alt="" ></span>
+                        <a class="Chancenter" href="{:url('index/business/index', ['i' => 1])}">
+                            <p>{$business[1]->lang??''}<em></em></p>
+                        </a>
+                    </li>
+                    <li>
+                        <span><img src="/uploads/{$business[2]['bg_image']}" alt=""></span>
+                        <a class="Chancenter" href="{:url('index/business/index', ['i' => 2])}">
+                            <p>{$business[2]->lang??''} <em></em></p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="chanyimg_botm clearfix">
+                <ul>
+                    <li>
+                        <span><img src="/uploads/{$business[3]['bg_image']}" alt=""></span>
+                        <a class="Chancenter" href="{:url('index/business/index', ['i' => 3])}">
+                            <p>{$business[3]->lang??''} <em></em></p>
+                        </a>
+                    </li>
+                    <li>
+                        <span><img src="/uploads/{$business[4]['bg_image']}" alt=""></span>
+                        <a class="Chancenter" href="{:url('index/business/index', ['i' => 4])}">
+                            <p>{$business[4]->lang??''} <em></em></p>
+                        </a>
+                    </li>
+                    <li>
+                        <span><img src="/uploads/{$business[5]['bg_image']}" alt=""></span>
+                        <a class="Chancenter" href="{:url('index/business/index', ['i' => 5])}">
+                            <p>{$business[5]->lang??''} <em></em></p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="business-container">
+			<div class="business-left">
+				<img src="/uploads/{$business[0]['bg_image']}" alt="">
+				<a href="{:url('index/business/index', ['i' => 0])}" class="business-title">{$business[0]->lang??''}
+					<span class="em"></span>
+				</a>
+			</div>
+
+			<div class="business-right">
+				<div class="business-right-top">
+					<div class="business-item">
+						<img src="/uploads/{$business[1]['bg_image']}" alt="" >
+						<a href="{:url('index/business/index', ['i' => 1])}" class="business-title">
+							{$business[1]->lang??''}
+							<span class="em"></span>
+						</a>
+					</div>
+					<div class="business-item">
+						<img src="/uploads/{$business[2]['bg_image']}" alt="" >
+						<a href="{:url('index/business/index', ['i' => 2])}" class="business-title">
+							{$business[2]->lang??''}
+							<span class="em"></span>
+						</a>
+					</div>
+				</div>
+
+				<div class="business-right-bottom">
+					<div class="business-item">
+						<img src="/uploads/{$business[3]['bg_image']}" alt="" >
+						<a href="{:url('index/business/index', ['i' => 3])}" class="business-title">
+							{$business[3]->lang??''}
+							<span class="em"></span>
+						</a>
+					</div>
+					<div class="business-item">
+						<img src="/uploads/{$business[4]['bg_image']}" alt="" >
+						<a href="{:url('index/business/index', ['i' => 4])}" class="business-title">
+							{$business[4]->lang??''}
+							<span class="em"></span>
+						</a>
+					</div>
+					<div class="business-item">
+						<img src="/uploads/{$business[5]['bg_image']}" alt="" >
+						<a href="{:url('index/business/index', ['i' => 5])}" class="business-title">
+							{$business[5]->lang??''}
+							<span class="em"></span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div> -->
+
+</div>
+
+
+<div class="Chanyebar">
+    <div class="inner">
+        <div class="Titlebars">
+            <p class="lfish"><img src="/assets/images/left_fish.png"></p>
+            <h3 class="xd"><a style="color: #3C6080" href="{:url('index/product/index')}">{:lang('product')}</a></h3>
+            <p class="rfish"><img src="/assets/images/right_fish.png"></p>
+        </div>
+    </div>
+    <div class="Chanpter clearfix" style="background-image: url(/uploads/{:cache('config')['index_product_bgimg']});min-height: 588px">
+
+
+        <!--弹窗-->
+        <ul class="float_Popup" style="opacity: 0.7">
+
+            <a href="#" class="phone">
+                <li>
+                    <div class="icon">
+                        <img src="/front/images/float_icon1.png">
+                    </div>
+
+
+                    <div class="taac">{$contacts->phone}</div>
+                </li>
+            </a>
+
+            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$contacts->qq}&site=qq&menu=yes">
+                <li>
+                    <div class="icon"><img src="/front/images/float_icon2.png"></div>
+
+
+                </li>
+            </a>
+            <a href="#">
+                <li>
+                    <div class="icon"><img src="/front/images/float_icon3.png"></div>
+
+                    <div class="taac">
+                        <img src="/uploads/{$contacts->code_picture}">
+
+                    </div>
+                </li>
+            </a>
+            <a href="#" id="tt">
+                <li>
+                    <div class="icon"><img src="/front/images/float_icon4.png"></div>
+
+                </li>
+            </a>
+        </ul>
+
+
+        <div class="inner">
+            <div class="Fishbanks">
+                <!-- Swiper -->
+
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+
+                        {foreach $products as $v}
+                        <div class="swiper-slide clearfix">
+                            <div class="Fishimgs"><img src="/uploads/{$v->cover}" alt=""></div>
+                            <div class="Fishjieshao">
+                                <div class="">
+                                    <h3><span>{$v->lang_name}</span></h3>
+                                    <div class="Fishpages">
+                                        {:mb_substr(strip_tags($v->lang_con),0,100)}
+                                    </div>
+                                    <div class="Fishmore"><a href="{:url('index/product/read', ['id' => $v->id])}">{:lang('detail')}+</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        {/foreach}
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="NewsIndex">
+    <div class="inner">
+        <div class="Titlebars">
+            <p class="lfish"><img src="/assets/images/left_fish.png"></p>
+            <h3 class="xd"><a style="color: #3C6080" href="{:url('index/news/index')}">{:lang('news')}</a></h3>
+            <p class="rfish"><img src="/assets/images/right_fish.png"></p>
+        </div>
+    </div>
+    <div class="Newslisrt clearfix">
+        <ul>
+            {foreach $news as $v}
+            <li>
+                <a href="{:url('index/news/read', ['id' => $v->id])}">
+                    <div class="">
+                        <div class="Newsimgs">
+
+                            <img src="/uploads/{$v->cover}" alt="">
+                            <p>{$v->category->lang}</p>
+                        </div>
+                        <div class="Newspages">
+                            <h3>{$v->lang_title}</h3>
+                            <h4>{$v->create_time}</h4>
+                            <p>
+                                {:mb_substr(strip_tags($v->lang_con),0,200)}
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            {/foreach}
+            <!-- <li>
+				<a href="###">
+					<div class="">
+						<div class="Newsimgs"><img src="images/newimg_2.jpg" alt=""><p>集团新闻行业动态</p></div>
+						<div class="Newspages">
+							<h3>富谷集团助力2019大连夏季达沃斯年会文化晚宴</h3>
+							<h4>2019-07-11</h4>
+							<p>7月1日—3日，2019年夏季达沃斯论坛年会在大连举行，这是我国举办的第13届，也是大连
+	承办的第七届夏季达沃斯论坛。来自全球近100个国家和地区的2000余名政商界领袖、学界
+	专家和媒体代表参与本次年会。</p>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="###">
+					<div class="">
+						<div class="Newsimgs"><img src="images/newimg_3.jpg" alt=""><p>社会责任</p></div>
+						<div class="Newspages">
+							<h3>富谷集团助力2019大连夏季达沃斯年会文化晚宴</h3>
+							<h4>2019-07-11</h4>
+							<p>7月1日—3日，2019年夏季达沃斯论坛年会在大连举行，这是我国举办的第13届，也是大连
+	承办的第七届夏季达沃斯论坛。来自全球近100个国家和地区的2000余名政商界领袖、学界
+	专家和媒体代表参与本次年会。</p>
+						</div>
+					</div>
+				</a>
+			</li> -->
+        </ul>
+    </div>
+
+    <div class="Lookmorebt"><a href="{:url('index/news/index')}">{:lang('readmore')}</a></div>
+</div>
+
+{/block} {block name="script"}
+<script type="text/javascript">
+    $(function() {
+        //let poster = "http://wap.weixinkefu.top/uploads/{:cache('config')['logo']}";
+        //$("video").attr('poster', poster);
+        $("video").attr('poster', './static/cover.jpg');
+        var swiper = new Swiper('.banner_index .swiper-container', {
+            loop: true,
+            slidesPerView: 1,
+            //effect:'fade',
+            // autoplay: {
+            //   delay: 2500,
+            //   disableOnInteraction: false,
+
+            // },
+            autoplay: true,
+
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true,
+            }
+
+        });
+
+        $(".phone").on('click', function() {
+
+        })
+    })
+
+    var swiper = new Swiper('.Fishbanks .swiper-container', {
+        loop: true,
+        slidesPerView: 1,
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: '.Fishbanks .swiper-button-next',
+            prevEl: '.Fishbanks .swiper-button-prev',
+        },
+    });
+</script>
+<script>
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > 800) {
+            $("#tt").fadeIn(500);
+        } else {
+            $("#tt").fadeOut(500);
+        }
+    });
+    //当点击跳转链接后，回到页面顶部位置
+    $("#tt").click(function() {
+        //$('body,html').animate({scrollTop:0},1000);
+        if ($('html').scrollTop()) {
+            $('html').animate({
+                scrollTop: 0
+            }, 1000);
+            return false;
+        }
+        $('body').animate({
+            scrollTop: 0
+        }, 1000);
+        return false;
+    });
+</script>
+{/block}

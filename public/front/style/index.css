@@ -1,0 +1,37 @@
+﻿
+/*分辨率小于1349px*/
+@media(max-width:1349px){
+	
+} 
+/*分辨率小于1349px end*/
+
+
+/*分辨率小于1023px*/
+@media(max-width: 1023px){
+	.slidemx ul li{
+		width:100%;
+	}
+}
+
+/*分辨率小于1023px  end*/
+
+/**/
+.visible-xs{
+	display:none !important;
+}
+/**/
+
+
+/*分辨率小于768px*/
+@media(max-width: 767px){
+	
+}
+/*分辨率小于768px end*/
+
+
+/*分辨率小于610px*/
+@media(max-width: 610px){
+	
+	
+}
+/*分辨率小于610px  end*/

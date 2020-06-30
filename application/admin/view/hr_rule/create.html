@@ -1,0 +1,41 @@
+{extend name="common/form"}
+{block name="content"}
+
+	<form class="layui-form"  action="{:empty($data)?url('admin/hr_rule/save'):url('admin/hr_rule/update', ['id'=> $data->id])}">
+		<div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="x-red"></span>内容
+      </label>
+
+      <div class="layui-input-block">
+         <textarea  id="content" class="layui-input">{$data->content??''}</textarea>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="x-red"></span>英文内容
+      </label>
+
+      <div class="layui-input-block">
+         <textarea name="en_content" id="en_content" class="layui-input">{$data->en_content??''}</textarea>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="x-red"></span>排序
+      </label>
+
+      <div class="layui-input-inline">
+         <input type="number" name="order" class="layui-input" value="{$data->order??0}">
+      </div>
+    </div>
+    <div class="layui-form-item">
+        <label for="L_repass" class="layui-form-label"></label>
+        <button class="layui-btn" lay-filter="add" type="button" lay-submit="">增加</button>
+    </div>
+	</form>
+
+
+{/block}

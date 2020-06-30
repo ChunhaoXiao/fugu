@@ -1,0 +1,160 @@
+{extend name="layout"}
+
+{block name="content"}
+	<div class="banner_gy banner_xw">
+		<div class="logo2"><img src="/uploads/{:cache('banner')['producct']}" alt=""></div>
+		<div class="bangywzhi">
+			<h3>{:lang('product')}</h3>
+			<!-- <p>NEWS CENTER</p> -->
+		</div>
+	</div>
+
+	<div class="Gyuscenter">
+	<div class="Mainbnav">   
+		<div class="inner">
+			<a href="{:url('index/index/index')}">首页></a>
+			<a href="{:url('index/product/index')}">产品中心></a>
+			<a href="{:url('index/product/index', ['category_id' => $data->category_id])}">{$data->category->name}></a>
+			<a href="javascript:;">{$data->lang_name}</a>
+		</div>
+	</div>
+	<div class="Gyfullpages">
+		<div class="inner clearfix">
+
+			<div class="Gstitle_bar">
+				<!-- <div class="Gstitle active"> -->
+					<div class="Titlebars"><h3 class="">{$data->lang_name}</h3></div>
+				<!-- </div> -->
+				<!-- <div class="Gstitle">
+					<div class="Titlebars"><h3>行业动态</h3></div>
+				</div>
+				<div class="Gstitle">
+					<div class="Titlebars"><h3>社会责任</h3></div>
+				</div> -->
+			</div>
+
+			<div class="Gslistnav_pr">
+				<!-- <div class="Gslistnav Gslistnav_1 clearfix">
+					<ul>
+						<li class="active"><a href="###">集团新闻</a></li>
+						<li><a href="###">行业动态</a></li>
+						<li><a href="###">社会责任</a></li>
+					</ul>
+				</div> -->
+				<div class="Gslistnav_huan">
+
+					<!-- 1 集团新闻 -->
+					<div class="Gslistnav_items active clearfix">
+						<div class="clearfix">
+							<div class="Gsjieahso_1">
+								<h3>{$data->lang_name}</h3>
+								<h4>
+									<span class="icon_1">发布时间：{$data->create_time} </span>
+									
+								</h4>
+							</div>
+							<div class="clearfix">
+								<div class="Textslidey">
+
+									{$data->lang_con|raw}
+									<!-- <p>7月1日—3日，2019年夏季达沃斯论坛年会在大连举行，这是我国举办的第13届，也是大连承办的第七届夏季达沃斯论坛。来自全球近100个国家和地区的2000余名政商界领袖、学界专家和媒体代表参与本次年会。</p>
+									<div class="nhimgbar"><img src="images/nhimg_1.jpg" alt=""></div>
+									<p>达沃斯年会文化晚宴“大连之夜”散发出浓浓的“中国味”，让现场中外嘉宾品味了中华艺术精粹与文化气韵，感受到大连这座城市厚重的文化底蕴和博大胸怀。</p>
+									<div class="nhimgbar"><img src="images/nhimg_2.jpg" alt=""></div>
+									<p>大连市政府、大连美食文化协会等相关机构对每一家入选企业进行全方位考核，按照国家级食品检验标准，对用料选材、制作、食品安全等方面都严格要求，经半个多月的食品调查跟踪，富谷集团凭借自身产品的品牌和质量优势亮相达沃斯年会文化晚宴，为国内外友人准备了丰盛的河豚美食，让世界深刻认识了解中国河豚文化。</p>
+									<p>在达沃斯的舞台上，为了能让嘉宾品尝到特色的中国味道，我们精心挑选食材，以多年来对河豚产品的独特理解，精心烹制向世界展示了极具特色的河豚美食并得到现场来宾的广泛认可。</p>
+									<div class="nhimgbar"><img src="images/nhimg_3.jpg" alt=""></div>
+									<p>富谷“形象大使”福鱼萌娃也亮相本次活动成为会场中的魅力焦点为"大连之夜"增添了一道亮丽的风景线。</p>
+									<div class="nhimgbar"><img src="images/nhimg_4.jpg" alt=""></div>
+									<p>这次饮食文化的交流跨越了语言的障碍和肤色的界限不仅是对富谷集团的发展与发扬上不断精进的强大推动力也让富谷品牌走向世界与国际友人携手合作，开拓创新！</p> -->
+								</div>
+							</div>
+							<div style="margin-top: 50px; padding-left: 20px;">{:lang('related')}</div>
+							<div style="display: flex;justify-content:space-around;">
+								<!-- <div>
+									<span style="width: 85px"><<上一篇：{if $data->prev}</span> <a href="{:url('index/news/read', ['id' => $data->prev->id])}">{$data->prev->title}</a> {else /}无{/if}</a>
+								</div>
+								<div>
+									<span>下一篇：</span>{if $data->next} <a href="{:url('index/news/read', ['id' => $data->next->id])}">{$data->next->title}</a> {else /} 无 {/if}>>
+								</div> -->
+								{foreach $data->getSimilar() as $v}
+									<a href="{:url('index/product/read', ['id' => $v->id])}" style="width: 200px; height: 200px; margin:10px;text-align: center;"><img src="/uploads/{$v->cover}" width="200" height="200">
+										<span>{$v->lang_name}</span>
+									</a>
+
+								{/foreach}
+								
+							</div>
+							
+						</div>
+					</div>
+
+					<!-- 2 行业动态  -->
+					<!-- <div class="Gslistnav_items clearfix">
+						<div class="clearfix">
+							<div class="Gsjieahso_1">
+								<h3>富谷集团助力2019大连夏季达沃斯年会文化晚宴</h3>
+								<h4>
+									<span class="icon_1">发布时间：2019-07-11</span>
+									<span class="icon_2">阅读量：438</span>
+								</h4>
+							</div>
+							<div class="clearfix">
+								<div class="Textslidey">
+									<p>7月1日—3日，2019年夏季达沃斯论坛年会在大连举行，这是我国举办的第13届，也是大连承办的第七届夏季达沃斯论坛。来自全球近100个国家和地区的2000余名政商界领袖、学界专家和媒体代表参与本次年会。</p>
+									<div class="nhimgbar"><img src="images/nhimg_1.jpg" alt=""></div>
+									<p>达沃斯年会文化晚宴“大连之夜”散发出浓浓的“中国味”，让现场中外嘉宾品味了中华艺术精粹与文化气韵，感受到大连这座城市厚重的文化底蕴和博大胸怀。</p>
+									<div class="nhimgbar"><img src="images/nhimg_2.jpg" alt=""></div>
+									<p>大连市政府、大连美食文化协会等相关机构对每一家入选企业进行全方位考核，按照国家级食品检验标准，对用料选材、制作、食品安全等方面都严格要求，经半个多月的食品调查跟踪，富谷集团凭借自身产品的品牌和质量优势亮相达沃斯年会文化晚宴，为国内外友人准备了丰盛的河豚美食，让世界深刻认识了解中国河豚文化。</p>
+									<p>在达沃斯的舞台上，为了能让嘉宾品尝到特色的中国味道，我们精心挑选食材，以多年来对河豚产品的独特理解，精心烹制向世界展示了极具特色的河豚美食并得到现场来宾的广泛认可。</p>
+									<div class="nhimgbar"><img src="images/nhimg_3.jpg" alt=""></div>
+									<p>富谷“形象大使”福鱼萌娃也亮相本次活动成为会场中的魅力焦点为"大连之夜"增添了一道亮丽的风景线。</p>
+									<div class="nhimgbar"><img src="images/nhimg_4.jpg" alt=""></div>
+									<p>这次饮食文化的交流跨越了语言的障碍和肤色的界限不仅是对富谷集团的发展与发扬上不断精进的强大推动力也让富谷品牌走向世界与国际友人携手合作，开拓创新！</p>
+								</div>
+							</div>
+							<div class="Fanynext clearfix">
+								<a href="###"><<上一篇：无</a>
+								<a href="###">下一篇：富谷”红鳍东方鲀 福鱼鲜深圳暨深圳五星总厨厨艺交流会“圆满落幕！>></a>
+							</div>
+						</div>
+					</div> -->
+
+					<!-- 3 社会责任  -->
+					<!-- <div class="Gslistnav_items clearfix">
+						<div class="clearfix">
+							<div class="Gsjieahso_1">
+								<h3>富谷集团助力2019大连夏季达沃斯年会文化晚宴</h3>
+								<h4>
+									<span class="icon_1">发布时间：2019-07-11</span>
+									<span class="icon_2">阅读量：438</span>
+								</h4>
+							</div>
+							<div class="clearfix">
+								<div class="Textslidey">
+									<p>7月1日—3日，2019年夏季达沃斯论坛年会在大连举行，这是我国举办的第13届，也是大连承办的第七届夏季达沃斯论坛。来自全球近100个国家和地区的2000余名政商界领袖、学界专家和媒体代表参与本次年会。</p>
+									<div class="nhimgbar"><img src="images/nhimg_1.jpg" alt=""></div>
+									<p>达沃斯年会文化晚宴“大连之夜”散发出浓浓的“中国味”，让现场中外嘉宾品味了中华艺术精粹与文化气韵，感受到大连这座城市厚重的文化底蕴和博大胸怀。</p>
+									<div class="nhimgbar"><img src="images/nhimg_2.jpg" alt=""></div>
+									<p>大连市政府、大连美食文化协会等相关机构对每一家入选企业进行全方位考核，按照国家级食品检验标准，对用料选材、制作、食品安全等方面都严格要求，经半个多月的食品调查跟踪，富谷集团凭借自身产品的品牌和质量优势亮相达沃斯年会文化晚宴，为国内外友人准备了丰盛的河豚美食，让世界深刻认识了解中国河豚文化。</p>
+									<p>在达沃斯的舞台上，为了能让嘉宾品尝到特色的中国味道，我们精心挑选食材，以多年来对河豚产品的独特理解，精心烹制向世界展示了极具特色的河豚美食并得到现场来宾的广泛认可。</p>
+									<div class="nhimgbar"><img src="images/nhimg_3.jpg" alt=""></div>
+									<p>富谷“形象大使”福鱼萌娃也亮相本次活动成为会场中的魅力焦点为"大连之夜"增添了一道亮丽的风景线。</p>
+									<div class="nhimgbar"><img src="images/nhimg_4.jpg" alt=""></div>
+									<p>这次饮食文化的交流跨越了语言的障碍和肤色的界限不仅是对富谷集团的发展与发扬上不断精进的强大推动力也让富谷品牌走向世界与国际友人携手合作，开拓创新！</p>
+								</div>
+							</div>
+							<div class="Fanynext clearfix">
+								<a href="###"><<上一篇：无</a>
+								<a href="###">下一篇：富谷”红鳍东方鲀 福鱼鲜深圳暨深圳五星总厨厨艺交流会“圆满落幕！>></a>
+							</div>
+						</div>
+					</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{/block}

@@ -1,0 +1,45 @@
+{extend name="common/form"}
+{block name="content"}
+
+	<form class="layui-form"  action="{:url('admin/security/save')}" method="post">
+		<div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="x-red"></span>原密码
+      </label>
+
+      <div class="layui-input-block">
+         <input name="old" type="password" class="layui-input">
+      </div>
+    </div>
+    
+    <div class="layui-form-item">
+      <label  class="layui-form-label">
+          <span class="x-red"></span>新密码
+      </label>
+
+      <div class="layui-input-block">
+         <input name="password" type="password" class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">
+          <span class="x-red"></span>确认密码
+      </label>
+
+      <div class="layui-input-block">
+         <input name="password_confirm" type="password" class="layui-input">
+      </div>
+    </div>
+    
+    <div class="layui-form-item">
+        <label for="L_repass" class="layui-form-label"></label>
+        <button class="layui-btn" lay-filter="adds" type="submit" lay-submit="">确定</button>
+    </div>
+	</form>
+  {if !empty(session('error'))}
+    <p style="color:red">{:session('error')}</p>
+  {/if}
+
+
+{/block}

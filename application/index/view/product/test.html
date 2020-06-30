@@ -1,0 +1,251 @@
+
+{extend name="layout"}
+
+{block name="content"}
+
+
+<script src="/front/script/slides-1.1.1-min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function() {
+  $('.succesny').olvSlides({
+    thumb: true,
+    thumbPage: true,
+    thumbDirection: "Y",
+    effect: 'fade'
+
+  });
+})
+</script>
+
+
+<div class="Gyuscenter">
+
+	<div class="Mainbnav">   
+
+
+
+		<div class="banner_gy banner_cpzx" style="background-image: url(/uploads/{:cache('banner')['product']})">
+
+	<div class="logo2"><img src="/uploads/{:cache('config')['logo']}" alt=""></div>
+
+	<div class="bangywzhi">
+
+		<h3>产品中心</h3>
+
+		<p>product center</p>
+
+	</div>
+
+</div>
+
+		<div class="inner">
+
+			<a href="{:url('index/index/index')}">{:lang('index')}></a>
+
+			<a href="{:url('index/product/index')}">{:lang('product')}></a>
+
+			<a href="javascript:;">{$data->lang_name}</a>
+
+		</div>
+
+	</div>
+
+	<div class="Gyfullpages">
+
+		<div class="inner clearfix">
+
+			<div class="Gstitle_bar">
+
+				<div class="Gstitle active">
+
+					<div class="Titlebars active">
+            <h3 class="">{:lang('product')}</h3>
+          </div>
+
+				</div>
+
+			</div>
+
+			<div class="Gslistnav Gslistnav_1 clearfix">
+
+				<ul>
+
+					<li class="{:empty(request()->category_id)? 'active' : ''}"><a href="{:url('product/index')}">{:lang('all_product')}</a></li>
+
+					{foreach $cates as $v}
+
+						<li class="{:request()->category_id == $v->id? 'active':''}"><a href="{:url('index/product/index', ['category_id' => $v->id])}">{$v->lang}</a></li>
+
+					{/foreach}
+
+					<!-- <li><a href="###">活品＆鲜品</a></li>
+
+					<li><a href="###">冻品</a></li>
+
+					<li><a href="###">制品</a></li>
+
+					<li><a href="###">休闲食品</a></li>
+
+					<li><a href="###">海参系列</a></li> -->
+
+				</ul>
+
+			</div>			
+
+<div class="succe_wrod">
+            
+            {if $data->album}
+            <div class="successlunbo">
+        <div class="succesny">
+            <div class="control">
+                <ul class="change">
+                </ul>
+            </div>
+            <div class="thumbWrap">
+                <div class="thumbCont">
+                    <ul>
+                        <!-- img属性, url=url, text=描述, bigimg=大图, alt=标题  -->
+                        {foreach $data->album as $v}
+                        <li>
+                            <div><img src="/uploads/{$v}" url="" bigImg="/uploads/{$v}" alt=""></div>
+                        </li>
+                        {/foreach}
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {/if}
+
+
+{if $data->album}
+<div class="zuipin_mobile">
+        <!-- Swiper -->
+        <div class="swiper-container gallery-top">
+          <div class="swiper-wrapper">
+            {foreach $data->album as $v}
+            <div class="swiper-slide">
+              <div class="pinch-zoom"><img src="/uploads/{$v}" width="100%"></div>
+            </div>
+
+            {/foreach}
+          </div>
+        </div>
+        <div class="swiper-container gallery-thumbs">
+          <div class="swiper-wrapper">
+            {foreach $data->album as $v}
+              <div class="swiper-slide">
+                <img src="/uploads/{$v}" width="100%">
+              </div>
+            {/foreach}
+           
+          </div>
+        </div>
+      </div>
+
+      {/if}
+      
+
+
+<div class="succe_tit">
+<h3>{$data->lang_name}</h3>
+</div>
+   <div class="succe_text">
+    {$data->lang_con|raw}
+  
+   
+   
+   </div>         
+
+</div>
+
+			
+
+            
+
+            
+
+
+
+
+
+
+
+            
+
+            
+
+		</div>
+
+	</div>
+
+</div>
+
+
+
+{/block}
+
+
+
+<!-- footer -->	
+
+
+
+
+
+
+
+
+{block name="script"}
+<link rel="stylesheet" rev="stylesheet" href="/front/style/swiper.min3.0.css" type="text/css" />
+<script type="text/javascript" src="/front/script/swiper.min3.0.js"></script>
+<script type="text/javascript">
+ 	 var swiper = new Swiper('.banner_index .swiper-container', {
+	      loop:true,
+	      slidesPerView:1,
+	      autoplay: {
+	        delay: 2500,
+	        disableOnInteraction: false,
+	      },
+    });
+</script>
+
+<script type="text/javascript">
+ 	 var swiper = new Swiper('.Fishbanks .swiper-container', {
+	      loop:true,
+	      slidesPerView:1,
+	      autoplay: {
+	        delay:4000,
+	        disableOnInteraction: false,
+	      },
+	      navigation: {
+		        nextEl: '.Fishbanks .swiper-button-next',
+		        prevEl: '.Fishbanks .swiper-button-prev',
+		      },
+    });
+</script>
+
+<script>
+var galleryTop = new Swiper('.gallery-top', {
+    spaceBetween: 10,
+    loop:true,
+    loopedSlides: 5, //looped slides should be the same    
+     pagination: '.swiper-pagination',
+    paginationType: 'fraction',
+    autoHeight: true, //enable auto height
+});
+var galleryThumbs = new Swiper('.gallery-thumbs', {
+    spaceBetween:2,
+    slidesPerView: 4,
+    touchRatio: 0.2,
+    loop:true,
+    loopedSlides: 5, //looped slides should be the same
+    slideToClickedSlide: true
+});
+galleryTop.params.control = galleryThumbs;
+galleryThumbs.params.control = galleryTop;
+</script>
+
+{/block}
+

@@ -1,0 +1,135 @@
+{extend name="common/form"}
+
+{block name="content"}
+
+	<form class="layui-form" enctype="multipart/form-data" action="{:url('admin/contact/save')}" method="post">
+
+   <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="">公司名称</span>
+      </label>
+      <div class="layui-input-block">
+        <input type="text" name="name" class="layui-input" value="{$data->name??''}">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="">英文名称</span>
+      </label>
+      <div class="layui-input-block">
+        <input type="text" name="en_name" class="layui-input" value="{$data->en_name??''}">
+      </div>
+    </div>
+
+		<div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="">地址</span>
+      </label>
+      <div class="layui-input-block">
+        <input type="text" name="address" class="layui-input" value="{$data->address??''}">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="">英文地址</span>
+      </label>
+      <div class="layui-input-block">
+        <input type="text" name="en_address" class="layui-input" value="{$data->en_address??''}">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="">电话</span>
+      </label>
+      <div class="layui-input-block">
+        <input type="text" name="phone" class="layui-input" value="{$data->phone??''}">
+      </div>
+    </div>
+
+     <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="">QQ</span>
+      </label>
+      <div class="layui-input-block">
+        <input type="text" name="qq" class="layui-input" value="{$data->qq??''}">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="">传真</span>
+      </label>
+      <div class="layui-input-block">
+        <input type="text" name="fax" class="layui-input" value="{$data->fax??''}">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="">邮编</span>
+      </label>
+      <div class="layui-input-block">
+        <input type="text" name="post_code" class="layui-input" value="{$data->post_code??''}">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="">网址</span>
+      </label>
+      <div class="layui-input-block">
+        <input type="text" name="web_site" class="layui-input" value="{$data->web_site??''}">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="">经度</span>
+      </label>
+      <div class="layui-input-block">
+        <input type="text" name="longitude" class="layui-input" value="{$data->longitude??''}">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="">纬度</span>
+      </label>
+      <div class="layui-input-block">
+        <input type="text" name="latitude" class="layui-input" value="{$data->latitude??''}">
+      </div>
+    </div>
+
+    <!-- <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="">地图代码</span>
+      </label>
+      <div class="layui-input-block">
+        <textarea class="" cols="100" rows="10" name="map_code">{$data->map_code??''}</textarea>
+      </div>
+    </div> -->
+
+
+    <div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="">二维码图片</span>
+      </label>
+      <div class="layui-input-block">
+        <input type="file" name="code_picture">
+      </div>
+      {if !empty($data->code_picture)}
+      <img src="/uploads/{$data->code_picture}" width="50" height="50">
+      {/if}
+    </div>
+
+
+
+    <div class="layui-form-item">
+        <label for="L_repass" class="layui-form-label"></label>
+        <button class="layui-btn"  type="submit">确定</button>
+        {if !empty(session('success'))} 
+          <span style="color:green">
+            操作成功
+          </span>
+        {/if}
+    </div>
+	</form>
+{/block}

@@ -1,0 +1,307 @@
+{extend name="layout"} {block name="content"}
+
+<div class="banner_gy" style="background-image: url(/uploads/{:cache('banner')['about']})">
+    <div class="logo2"> <img src="/uploads/{:cache('config')['logo']??''}" alt=""></div>
+    <div class="bangywzhi">
+        <h3>关于我们</h3>
+        <p>ABOUT US</p>
+    </div>
+</div>
+{php} $index = request()->index??0; {/php}
+<div class="Gyuscenter">
+    <div class="Mainbnav">
+        <div class="inner">
+            <a href="{:url('index/index/index')}">{:lang('index')}></a>
+            <a href="{:url('index/about/index')}">{:lang('about')}></a>
+            <a href="javascript:;" id="nav_text">{$datas->subcates[$index]->name}</a>
+
+
+            </a>
+        </div>
+    </div>
+    <div class="Gyfullpages">
+        <div class="inner clearfix">
+            <div class="Gstitle_bar">
+                {foreach $datas->subcates as $k => $v}
+                <div class="Gstitle {if $k == $index} active {/if}">
+                    <div class="Titlebars">
+                        <h3>{if $k == 0 && cookie('think_var') == 'zh-cn'}关于富谷{else /}{$v->lang}{/if}</h3>
+                    </div>
+                </div>
+                {/foreach}
+                <!-- <div class="Gstitle">
+          <div class="Titlebars"><h3 class="ds">董事长致辞</h3></div>
+        </div>
+        <div class="Gstitle">
+          <div class="Titlebars"><h3>发展历程</h3></div>
+        </div>
+        <div class="Gstitle">
+          <div class="Titlebars"><h3>企业文化</h3></div>
+        </div>
+        <div class="Gstitle">
+          <div class="Titlebars"><h3>资质荣誉</h3></div>
+        </div>
+        <div class="Gstitle">
+          <div class="Titlebars"><h3>核心价值</h3></div>
+        </div>
+        <div class="Gstitle">
+          <div class="Titlebars"><h3>企业视频</h3></div>
+        </div>
+      </div> -->
+
+                <div class="Gslistnav_pr">
+                    <div class="Gslistnav Gslistnav_1 clearfix">
+                        <ul>
+
+                            {foreach $datas->subcates as $k => $v}
+                            <li class="{$index == $k?  'active' : ''}"><a href="javascript:;">{$v->lang}</a></li>
+
+                            {/foreach}
+                            <!-- <li class="active"><a href="###">公司介绍</a></li>
+            <li><a href="###">董事长致辞</a></li>
+            <li><a href="###">发展历程</a></li>
+            <li><a href="###">企业文化</a></li>
+            <li><a href="###">资质荣誉</a></li>
+            <li><a href="###">核心价值</a></li>
+            <li><a href="###">企业视频</a></li> -->
+                        </ul>
+                    </div>
+                    <div class="Gslistnav_huan">
+
+                        <!-- 1 公司介绍 -->
+                        {foreach $datas->subcates as $k => $v}
+                        <div class="Gslistnav_items  clearfix {if $k == $index} active {/if}">
+                            <div class="Gsjieahso_1">
+                                {if !empty($v->aboutus->content)} {if strpos($v->name, '荣誉') !== false}
+                                <div class="ryimgbanks clearfix">
+                                    <ul>
+                                        {foreach :explode(',', $v->aboutus->content) as $v}
+                                        <li>
+                                            <a href="/uploads/{$v}" data-lightbox="roadtrip"><img src="/uploads/{$v}" alt=""></a>
+                                        </li>
+                                        {/foreach}
+                                    </ul>
+                                </div>
+                                {else /}
+                                <div {if strpos($v->name, '视频') !== false} style="text-align: center;" {/if}>
+                                    <div class="Gyplay_img">
+                                        {$v->aboutus->lang_con|raw}
+                                    </div>
+
+                                </div>
+                                {/if} {/if}
+                            </div>
+
+                        </div>
+                        {/foreach}
+
+                        <!-- 2 董事长致辞  -->
+                        <!-- <div class="Gslistnav_items clearfix">
+            <div class="Dszhanzhic">
+              <div class="Dsimgbar"><img src="images/dszimg.jpg" alt=""></div>
+              <div class="Dsrightbar">
+                <div class="xiands"></div>
+                <div>
+                  <p>在人杰地灵的黄海之滨，富谷人艰苦创业执着奋进，谱写了驾海驭浪的壮美篇章，肩负起振兴现代海洋渔业的使命和担当。“胆识开先河，激情创未来”，是富谷人永恒的理念。为了创造中国河豚产业的辉煌，为了实现富谷百年兴旺的梦想，富谷人愿携手有识之士共创美好明天。</p>
+                  <p>Dalian Fugu Groups is located in the coast of the Yellow Sea, all our staffs work hard,……. to shoulder the revitalization of the mission and responsibility of modern Marine fisheries. "Courage, passion creates the future", is the eternal idea of Dalian Fugu Groups, In order to create the brilliance of Fugu Rubripes industry of China, in order to realize the dream of  Fugu in one hundred, Fugu people will prefer the man of insight for a better tomorrow hand in hand.</p>
+                </div>
+                <div class="Dsqianm"><img src="images/dsqian.png" alt=""></div>
+              </div>
+            </div>
+          </div> -->
+
+                        <!-- 3 发展历程  -->
+                        <!-- <div class="Gslistnav_items clearfix">
+            <div class="Fanzimg"><img src="images/Fanzimg.png" alt=""></div>
+          </div> -->
+
+                        <!-- 4 企业文化  -->
+                        <!-- <div class="Gslistnav_items clearfix">
+            <div class="Whuatext clearfix">
+              <ul>
+                <li>
+                  <div class="whuabanks">
+                    <h3>富谷企业文化标语</h3>    
+                    <p>诚信立足，创新致远</p>
+                    <p>没有执行力，就没有竞争力</p>
+                    <p>同心才能走的更远，同德才能走的更近</p>
+                    <p>将来的你一定会感谢现在奋斗的你</p>
+                    <p>和传统的昨天告别，向规范的未来迈进</p>
+                    <p>立足新起点，开创新局面</p>
+                    <p>为自己养成一个好习惯，给别人留下一个好印象</p>
+                    <p>不断超越，追求完美</p>
+                    <p>日事日毕，日清日高</p>
+                    <p>每天进一步，踏上成功路</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="whuabanks">
+                    <h3>职场原则</h3>    
+                    <p>请示工作说方案 汇报工作说结果</p>
+                    <p>交接工作讲道德 配合工作讲服务</p>
+                    <p>布置工作说标准 关心下级问过程</p>
+                    <p>回忆工作说感受 总结工作说流程</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="whuabanks">
+                    <h3>富谷荣辱观</h3>    
+                    <p>以热爱富谷为荣  以损害富谷为耻</p>
+                    <p>以实事求是为荣  以狭隘自私为耻</p>
+                    <p>以创新进步为荣  以不思进取为耻</p>
+                    <p>以勤奋敬业为荣  以贪图享乐为耻</p>
+                    <p>以团结协作为荣  以固步自封为耻</p>
+                    <p>以阳光做人为荣  以暗箱操作为耻</p>
+                    <p>以遵纪守法为荣  以违章乱纪为耻</p>
+                    <p>以崇尚节俭为荣  以奢侈浪费为耻</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="whuaimg"><img src="images/whuaimg.jpg" alt=""></div>
+
+            <div class="whauygang">
+              <div class="Ygangtext">
+                <h3>富谷企业文化纲要</h3>
+              </div>
+              <div class="Ygangroup clearfix">
+                <div class="Yganitems">
+                  <ul>
+                    <li>   
+                      <h3>一、公司使命</h3>
+                      <p>1、为国家创建一个具有国际竞争力的卓越企业</p>
+                      <p>2、为民族创建一个具有拜年发展力的世界品牌</p>
+                      <p>3、为提升消费者的健康品势服务</p>
+                      <p>4、为员工搭建实现人生价值的平台</p>
+                    </li>
+                    <li>   
+                      <h3>二、公司战略目标</h3>
+                      <p>不断开拓进取，坚持科学发展、持续创新，整合全球有效资源，把公司办成世界海珍品的领先企业</p>
+                    </li>
+                    <li>
+                      <h3>三、公司发展战略</h3>
+                      <p>科学管理、确保质量、拓展市场、提高效益。</p>
+                      <p>以品质优势、服务优势赢得市场及品牌优势，努力把公司办成享誉全球的“百年富谷”。</p>
+                    </li>
+                    <li>
+                      <h3>四、公司核心价值观</h3>
+                      <p>诚信、效率、责任、创新、团队</p>
+                      <p>公司、客户、员工共成长</p>
+                    </li>
+                    <li>
+                      <h3>五、公司管理方针</h3>
+                      <p>规范、精准、服务、协调、指导、监督、考核、高效</p>
+                      <p>管理到方方面面，精准到每个细节</p>
+                    </li>
+                    <li>
+                      <h3>六、公司战略定位</h3>
+                      <p>专注海珍品，做海珍品专家</p>
+                      <p>立足中国，放眼世界</p>
+                    </li>
+                    <li>
+                      <h3>七、公司的追求</h3>
+                      <p>培养一流员工，建设一流队伍，使用一流设备，实用一流管理，生产一流产品，提供一流服务，塑造一流品牌</p>
+                    </li>
+                  </ul>
+                </div>
+                <div class="Yganitems">
+                  <ul>
+                    <li>
+                      <h3>八、公司人力资源管理理念</h3>
+                      <p>一总则：以德取才，以能用才，以需育才，以信留才</p>
+                      <p>二基点：既要用人之力，更要用人之智</p>
+                      <p>三部曲：信任、约束、成长</p>
+                    </li>
+                    <li>
+                      <h3>九、公司企业精神：</h3>
+                      <p>胆识开先河，激情创未来</p>
+                    </li>
+                    <li>
+                      <h3>十、公司问题警示</h3>
+                      <p>所有的问题都是领导的问题</p>
+                      <p>看不出的问题是最大的问题</p>
+                      <p>重复出现的问题就是作风上的问题</p>
+                    </li>
+                    <li>
+                      <h3>十一、公司市场观</h3>
+                      <p>创造市场，只有疲软的思想，没有疲软的市场</p>
+                    </li>
+                    <li>
+                      <h3>十二、公司市场竞争理念</h3>
+                      <p>打价值战、品质站，不打价格战</p>
+                    </li>
+                    <li>
+                      <h3>十三、公司品牌建设目标</h3>
+                      <p>知名度、美誉度、忠诚度</p>
+                      <p>获利性、拓展性、持续性</p>
+                    </li>
+                    <li>
+                      <h3>十四、公司质量管理理念</h3>
+                      <p>为消费者提供100%安全，100%健康的优质产品</p>
+                    </li>
+                    <li>
+                      <h3>十五、个人修养</h3>
+                      <p>宠辱不惊、自强不息</p>
+                      <p>得意不忘形、失意不失态</p>
+                      <p>慎终如始、则无败事</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>-->
+
+                        <!-- 5 资质荣誉  -->
+                        <!-- <div class="Gslistnav_items clearfix">
+            <div class="ryimgbanks clearfix">
+              <ul>
+                <li><img src="images/ryimg_1.jpg" alt=""></li>
+                <li><img src="images/ryimg_2.jpg" alt=""></li>
+                <li><img src="images/ryimg_3.jpg" alt=""></li>
+                <li><img src="images/ryimg_4.jpg" alt=""></li>
+                <li><img src="images/ryimg_5.jpg" alt=""></li>
+                <li><img src="images/ryimg_6.jpg" alt=""></li>
+                <li><img src="images/ryimg_7.jpg" alt=""></li>
+                <li><img src="images/ryimg_8.jpg" alt=""></li>
+              </ul>
+            </div>
+          </div>
+ -->
+                        <!-- 6 核心价值  -->
+                        <!--  <div class="Gslistnav_items clearfix">
+            <div class="hezimg"><img src="images/hezimg.jpg" alt=""></div>
+          </div> -->
+
+                        <!-- 7 企业视频  -->
+                        <!-- <div class="Gslistnav_items clearfix">
+            <div class="clearfix">
+              <div class="Gyplay_img">
+                <img src="images/Gyplay_img.jpg" alt="">
+                <div class="Gyplaybtn">
+                  <a href="###"></a>
+                </div>
+              </div>
+            </div>
+          </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {/block} {block name="script"}
+    <script>
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'positionFromTop': 200,
+        })
+
+        $(function() {
+            $(".Gslistnav li").on('click', function() {
+                let text = $(this).find('a').text();
+                $("#nav_text").text(text);
+            })
+
+        })
+    </script>
+    {/block}

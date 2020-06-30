@@ -1,0 +1,59 @@
+{extend name="layout"}
+{block name="content"}
+<div class="Gyuscenter" style="padding-top: 100px">
+	<div class="Mainbnav">   
+		<div class="inner">
+			<a href="{:url('index/index')}">首页></a>
+			<a href="###">搜索结果</a>
+		</div>
+	</div>
+	<div class="Gyfullpages">
+		<div class="inner clearfix">
+			<div class="Gstitle_bar">
+				<div class="Gstitle active">
+					<div class="Titlebars"><h3 class="">搜索结果</h3></div>
+				</div>
+			</div>
+
+			<div class="Gslistnav_pr">
+				<div class="Gslistnav_huan">
+
+					<!-- 1 搜索结果 -->
+					<div class="Gslistnav_items active clearfix">
+						
+						<div class="clearfix">
+							<div class="sslistbank clearfix">
+								<ul>
+									{foreach $datas as $v}
+									<li>
+										<a href="{:url('index/news/read', ['id' => $v->id])}">
+											<div class="ssimgbrand"><img src="/uploads/{$v->cover??''}" alt=""></div>
+											<div class="ssrightbars">
+												<h3>{$v->name}</h3>
+												<h4>{$v->create_time}</h4>
+												<p>{:strip_tags($v->content)}</p>
+											</div>
+										</a>
+									</li>
+									{/foreach}									
+								</ul>
+							</div>
+							{$datas|raw}
+							<div class="Nextpages">
+								<!-- <a class="active" href="###">1</a>
+								<a href="###">2</a>
+								<a href="###">3</a>
+								<a href="###">4</a>
+								<a href="###">5</a>
+								<a href="###">6</a>
+								<a href="###">&gt;&gt;</a> -->
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}

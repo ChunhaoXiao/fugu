@@ -1,0 +1,39 @@
+{extend name="common/list" /}
+{block name="action"}
+	<button class="layui-btn" onclick="xadmin.open('添加新闻','/admin/news/create',800,600)"><i class="layui-icon"></i>添加</button>
+{/block}
+
+{block name="content"}
+	<table class="layui-table layui-form">
+		<thead>
+			<th>新闻标题</th>
+			<th>所属分类</th>
+			<th>发布时间</th>
+			<th>封面</th>
+
+			
+			<th></th>
+		</thead>
+		<tbody>
+			{foreach $datas as $v}
+				<tr>
+					<td>{$v->title}</td>
+					<td>{$v->category->name}</td>
+					<td>{$v->create_time}</td>
+					<td><img src="/uploads/{$v->cover}" width="50" height="50"></td>
+
+					<td>
+						<a title="编辑"  onclick="xadmin.open('修改','/admin/news/edit?id={$v->id}',600,400)" href="javascript:;">
+                        <i class="layui-icon">&#xe642;</i>
+                        </a>
+                        	&nbsp;&nbsp;&nbsp;
+                        <a title="删除" onclick="del(this)" href="javascript:;" data-url="{:url('admin/news/delete', ['id' => $v->id])}">
+                          <i class="layui-icon">&#xe640;</i>
+                        </a>
+					</td>
+				</tr>
+			{/foreach}
+		</tbody>
+	</table>
+	<p>{$datas|raw}</p>
+{/block}

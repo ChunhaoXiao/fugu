@@ -1,0 +1,247 @@
+{extend name="layout"} {block name="content"}
+<div class="banner_gy banner_xw" style="background-image: url(/uploads/{:cache('banner')['news']})">
+    <div class="logo2"><img src="/uploads/{:cache('config')['logo']}" alt=""></div>
+    <div class="bangywzhi">
+        <h3>新闻中心</h3>
+        <p>NEWS CENTER</p>
+    </div>
+</div>
+
+<div class="Gyuscenter">
+    <div class="Mainbnav">
+        <div class="inner">
+            <a href="{:url('index/index/index')}">{:lang('index')}></a>
+            <a href="{:url('index/news/index')}">{:lang('news')}></a>
+            <a href="javasctipt:;">{$category->lang}</a>
+        </div>
+    </div>
+    <div class="Gyfullpages">
+        <div class="inner clearfix">
+            <div class="Gstitle_bar">
+                <div class="Gstitle active">
+                    <div class="Titlebars">
+                        <p class="lfish"><img src="/assets/images/left_fish.png"></p>
+                        <h3 class="">{$category->lang}</h3>
+                        <p class="rfish"><img src="/assets/images/right_fish.png"></p>
+                    </div>
+                </div>
+                <!-- <div class="Gstitle">
+					<div class="Titlebars"><h3>行业动态</h3></div>
+				</div>
+				<div class="Gstitle">
+					<div class="Titlebars"><h3>社会责任</h3></div>
+				</div> -->
+            </div>
+
+            <div class="Gslistnav_pr">
+                <div class="Gslistnav Gslistnav_1 clearfix">
+                    <ul>
+                        {foreach $cates as $k => $v}
+                        <li class="{$category->id == $v->id ? 'active' : ''}"> <a href="{:url('index/news/index', ['category_id' => $v->id])}">{$v->lang}</a></li>
+                        {/foreach}
+                        <!-- <li class="active"><a href="###">集团新闻</a></li>
+						<li><a href="###">行业动态</a></li>
+						<li><a href="###">社会责任</a></li> -->
+                    </ul>
+                </div>
+                <div class="Gslistnav_huan">
+
+                    <!-- 1 公司介绍 -->
+                    <div class="Gslistnav_items active clearfix">
+                        <div class="clearfix">
+                            <div class="sslistbank clearfix">
+                                <ul>
+                                    {foreach $datas as $v}
+                                    <li>
+                                        <a href="{:url('index/news/read', ['id' => $v->id])}">
+                                            <div class="ssimgbrand">
+                                                <img src="/uploads/{$v->cover}" alt="">
+                                            </div>
+                                            <div class="ssrightbars">
+
+                                                <h3>{$v->title}</h3>
+                                                <h4>{$v->create_time}</h4>
+                                                {:mb_substr(strip_tags($v->content),0,100)}
+                                            </div>
+                                        </a>
+                                    </li>
+                                    {/foreach}
+
+                                </ul>
+                            </div>
+                            <div class="Nextpages">
+                                <!-- <a class="active" href="###">1</a>
+								<a href="###">2</a>
+								<a href="###">3</a>
+								<a href="###">4</a>
+								<a href="###">5</a>
+								<a href="###">6</a>
+								<a href="###">&gt;&gt;</a> -->
+                            </div>
+                            {$datas|raw}
+                        </div>
+                    </div>
+
+                    <!-- 2 活品＆鲜品  -->
+                    <!-- <div class="Gslistnav_items clearfix">
+						<div class="clearfix">
+							<div class="sslistbank clearfix">
+								<ul>
+									<li>
+										<a href="###">
+											<div class="ssimgbrand"><img src="images/ssimg_1.jpg" alt=""></div>
+											<div class="ssrightbars">
+												<h3>富谷集团助力2019大连夏季达沃斯年会文化晚宴</h3>
+												<h4>2019-07-11</h4>
+												<p>7月1日—3日，2019年夏季达沃斯论坛年会在大连举行，这是我国举办的第13届，也是大连承办的第七届夏季达沃斯论坛。来自全球近100个国家和地区的2000余名政商界领袖、学界专家和媒体代表参与本次年会。</p>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="###">
+											<div class="ssimgbrand"><img src="images/ssimg_1.jpg" alt=""></div>
+											<div class="ssrightbars">
+												<h3>富谷集团助力2019大连夏季达沃斯年会文化晚宴</h3>
+												<h4>2019-07-11</h4>
+												<p>7月1日—3日，2019年夏季达沃斯论坛年会在大连举行，这是我国举办的第13届，也是大连承办的第七届夏季达沃斯论坛。来自全球近100个国家和地区的2000余名政商界领袖、学界专家和媒体代表参与本次年会。</p>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="###">
+											<div class="ssimgbrand"><img src="images/ssimg_1.jpg" alt=""></div>
+											<div class="ssrightbars">
+												<h3>富谷集团助力2019大连夏季达沃斯年会文化晚宴</h3>
+												<h4>2019-07-11</h4>
+												<p>7月1日—3日，2019年夏季达沃斯论坛年会在大连举行，这是我国举办的第13届，也是大连承办的第七届夏季达沃斯论坛。来自全球近100个国家和地区的2000余名政商界领袖、学界专家和媒体代表参与本次年会。</p>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="###">
+											<div class="ssimgbrand"><img src="images/ssimg_1.jpg" alt=""></div>
+											<div class="ssrightbars">
+												<h3>富谷集团助力2019大连夏季达沃斯年会文化晚宴</h3>
+												<h4>2019-07-11</h4>
+												<p>7月1日—3日，2019年夏季达沃斯论坛年会在大连举行，这是我国举办的第13届，也是大连承办的第七届夏季达沃斯论坛。来自全球近100个国家和地区的2000余名政商界领袖、学界专家和媒体代表参与本次年会。</p>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="###">
+											<div class="ssimgbrand"><img src="images/ssimg_1.jpg" alt=""></div>
+											<div class="ssrightbars">
+												<h3>富谷集团助力2019大连夏季达沃斯年会文化晚宴</h3>
+												<h4>2019-07-11</h4>
+												<p>7月1日—3日，2019年夏季达沃斯论坛年会在大连举行，这是我国举办的第13届，也是大连承办的第七届夏季达沃斯论坛。来自全球近100个国家和地区的2000余名政商界领袖、学界专家和媒体代表参与本次年会。</p>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="###">
+											<div class="ssimgbrand"><img src="images/ssimg_1.jpg" alt=""></div>
+											<div class="ssrightbars">
+												<h3>富谷集团助力2019大连夏季达沃斯年会文化晚宴</h3>
+												<h4>2019-07-11</h4>
+												<p>7月1日—3日，2019年夏季达沃斯论坛年会在大连举行，这是我国举办的第13届，也是大连承办的第七届夏季达沃斯论坛。来自全球近100个国家和地区的2000余名政商界领袖、学界专家和媒体代表参与本次年会。</p>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="Nextpages">
+								<a class="active" href="###">1</a>
+								<a href="###">2</a>
+								<a href="###">3</a>
+								<a href="###">4</a>
+								<a href="###">5</a>
+								<a href="###">6</a>
+								<a href="###">&gt;&gt;</a>
+							</div>
+						</div>
+					</div> -->
+
+                    <!-- 3 冻品  -->
+                    <!-- <div class="Gslistnav_items clearfix">
+						<div class="clearfix">
+							<div class="sslistbank clearfix">
+								<ul>
+									<li>
+										<a href="###">
+											<div class="ssimgbrand"><img src="images/ssimg_1.jpg" alt=""></div>
+											<div class="ssrightbars">
+												<h3>富谷集团助力2019大连夏季达沃斯年会文化晚宴</h3>
+												<h4>2019-07-11</h4>
+												<p>7月1日—3日，2019年夏季达沃斯论坛年会在大连举行，这是我国举办的第13届，也是大连承办的第七届夏季达沃斯论坛。来自全球近100个国家和地区的2000余名政商界领袖、学界专家和媒体代表参与本次年会。</p>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="###">
+											<div class="ssimgbrand"><img src="images/ssimg_1.jpg" alt=""></div>
+											<div class="ssrightbars">
+												<h3>富谷集团助力2019大连夏季达沃斯年会文化晚宴</h3>
+												<h4>2019-07-11</h4>
+												<p>7月1日—3日，2019年夏季达沃斯论坛年会在大连举行，这是我国举办的第13届，也是大连承办的第七届夏季达沃斯论坛。来自全球近100个国家和地区的2000余名政商界领袖、学界专家和媒体代表参与本次年会。</p>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="###">
+											<div class="ssimgbrand"><img src="images/ssimg_1.jpg" alt=""></div>
+											<div class="ssrightbars">
+												<h3>富谷集团助力2019大连夏季达沃斯年会文化晚宴</h3>
+												<h4>2019-07-11</h4>
+												<p>7月1日—3日，2019年夏季达沃斯论坛年会在大连举行，这是我国举办的第13届，也是大连承办的第七届夏季达沃斯论坛。来自全球近100个国家和地区的2000余名政商界领袖、学界专家和媒体代表参与本次年会。</p>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="###">
+											<div class="ssimgbrand"><img src="images/ssimg_1.jpg" alt=""></div>
+											<div class="ssrightbars">
+												<h3>富谷集团助力2019大连夏季达沃斯年会文化晚宴</h3>
+												<h4>2019-07-11</h4>
+												<p>7月1日—3日，2019年夏季达沃斯论坛年会在大连举行，这是我国举办的第13届，也是大连承办的第七届夏季达沃斯论坛。来自全球近100个国家和地区的2000余名政商界领袖、学界专家和媒体代表参与本次年会。</p>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="###">
+											<div class="ssimgbrand"><img src="images/ssimg_1.jpg" alt=""></div>
+											<div class="ssrightbars">
+												<h3>富谷集团助力2019大连夏季达沃斯年会文化晚宴</h3>
+												<h4>2019-07-11</h4>
+												<p>7月1日—3日，2019年夏季达沃斯论坛年会在大连举行，这是我国举办的第13届，也是大连承办的第七届夏季达沃斯论坛。来自全球近100个国家和地区的2000余名政商界领袖、学界专家和媒体代表参与本次年会。</p>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="###">
+											<div class="ssimgbrand"><img src="images/ssimg_1.jpg" alt=""></div>
+											<div class="ssrightbars">
+												<h3>富谷集团助力2019大连夏季达沃斯年会文化晚宴</h3>
+												<h4>2019-07-11</h4>
+												<p>7月1日—3日，2019年夏季达沃斯论坛年会在大连举行，这是我国举办的第13届，也是大连承办的第七届夏季达沃斯论坛。来自全球近100个国家和地区的2000余名政商界领袖、学界专家和媒体代表参与本次年会。</p>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="Nextpages">
+								<a class="active" href="###">1</a>
+								<a href="###">2</a>
+								<a href="###">3</a>
+								<a href="###">4</a>
+								<a href="###">5</a>
+								<a href="###">6</a>
+								<a href="###">&gt;&gt;</a>
+							</div>
+						</div>
+					</div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

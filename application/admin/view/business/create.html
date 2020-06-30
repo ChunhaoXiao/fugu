@@ -1,0 +1,72 @@
+{extend name="common/form"}
+{block name="content"}
+
+	<form class="layui-form" enctype="multipart/form-data" action="{:empty($data)?url('admin/business/save'):url('admin/business/update', ['id'=> $data->id])}">
+		<div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="x-red"></span>所属栏目
+      </label>
+
+      <div class="layui-input-inline">
+         <select class="category_id" name="category_id">
+           {foreach $categories as $v}
+            <option value="{$v->id}" {:isset($data) && $data->category_id == $v->id? 'selected': ''}>{$v->name}</option>
+           {/foreach}
+         </select>
+      </div>
+    </div>
+    
+    <div class="layui-form-item">
+      <label class="layui-form-label">
+        标题(可选)
+      </label>
+      <div class="layui-input-block">
+        <input name="title" class="layui-input" value="{$data->title??''}">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">
+        英文标题(可选)
+      </label>
+      <div class="layui-input-block">
+        <input name="title" class="layui-input" value="{$data->en_title??''}">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">
+        排序
+      </label>
+      <div class="layui-input-block">
+        <input name="order" class="layui-input" type="number" value="{$data->order??0}">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">
+        内容
+      </label>
+      <div class="layui-input-block">
+        <textarea id="content">{$data->content??''}</textarea>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">
+        英文内容
+      </label>
+      <div class="layui-input-block">
+        <textarea id="en_content" name="en_content">{$data->en_content??''}</textarea>
+      </div>
+    </div>
+
+
+        <div class="layui-form-item">
+            <label for="L_repass" class="layui-form-label"></label>
+            <button class="layui-btn" lay-filter="add" type="button" lay-submit="">增加</button>
+        </div>
+	</form>
+
+
+{/block}

@@ -1,0 +1,143 @@
+{extend name="layout"} {block name="content"}
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=KysNpYZEILiMZddTleq5jcc8YzG8G4Ek"></script>
+<div class="banner_gy banner_lianx" style="background-image: url(/uploads/{:cache('banner')['contact']})">
+    <div class="logo2"><img src="/uploads/{:cache('config')['logo']}" alt=""></div>
+    <div class="bangywzhi">
+        <h3>联系我们</h3>
+        <p>product center</p>
+    </div>
+</div>
+<div class="Gyuscenter">
+    <div class="Mainbnav">
+        <div class="inner">
+            <a href="{:url('index/index/index')}">{:lang('index')}></a>
+            <a href="javascript:;">{:lang('contact')}</a>
+        </div>
+    </div>
+    <div class="Gyfullpages">
+        <div class="inner clearfix">
+            <div class="Gstitle_bar">
+                <div class="Gstitle active">
+                    <div class="Titlebars">
+                        <p class="lfish"><img src="/assets/images/left_fish.png"></p>
+                        <h3 class="">{:lang('contact')}</h3>
+                        <p class="rfish"><img src="/assets/images/right_fish.png"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="Gslistnav_pr">
+                <div class="Gslistnav_huan">
+
+                    <!-- 1 搜索结果 -->
+                    <div class="Gslistnav_items active clearfix">
+
+                        <div class="clearfix">
+                            <div class="Mapbanks" style="display: flex">
+                                <!--百度地图容器-->
+                                <div id="map" style="flex:1">
+
+                                </div>
+
+
+                                <div class="Lianadres_br">
+                                    <div class="Lianadres">
+                                        <ul class="clearfix">
+                                            <li class="icon_1">
+                                                <p>{$data->name_lang??''}</p>
+                                            </li>
+                                            <li class="icon_2">
+                                                <p>{:lang('phone')}：{$data->phone??''}</p>
+                                            </li>
+                                            <li class="icon_4">
+                                                <p>{:lang('post_code')}：{$data->post_code??''}</p>
+                                            </li>
+                                            <li class="icon_5">
+                                                <p>{:lang('website')}：{$data->web_site??''}</p>
+                                            </li>
+                                            <li class="icon_1">
+                                                <p>{:lang('address')}：{$data->address_lang??''}</p>
+                                            </li>
+
+                                            <!-- <li class="icon_3"><p>{:lang('fax')}：{$data->fax??''}</p></li> -->
+
+
+                                        </ul>
+                                        <div class="adwma">
+                                            <div class="Imgadwma">
+                                                {if !empty($data->code_picture)}
+                                                <img src="/uploads/{$data->code_picture}" width="200" height="200"> {/if}
+
+                                            </div>
+                                            <p>{:lang('scan_code')}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block} {block name="script"}
+
+<script type="text/javascript">
+    //创建和初始化地图函数：
+    function initMap() {
+        createMap(); //创建地图
+        setMapEvent(); //设置地图事件
+        addMapControl(); //向地图添加控件
+        addMapOverlay(); //向地图添加覆盖物
+    }
+
+    function createMap() {
+        map = new BMap.Map("map");
+        let long = Number("{$data->longitude}");
+        let lat = Number("{$data->latitude}");
+
+        map.centerAndZoom(new BMap.Point(long, lat), 14);
+    }
+
+    function setMapEvent() {
+        map.enableScrollWheelZoom();
+        map.enableKeyboard();
+        map.enableDragging();
+        map.enableDoubleClickZoom()
+    }
+
+    function addClickHandler(target, window) {
+        target.addEventListener("click", function() {
+            target.openInfoWindow(window);
+        });
+    }
+
+    function addMapOverlay() {}
+    //向地图添加控件
+    function addMapControl() {
+        var scaleControl = new BMap.ScaleControl({
+            anchor: BMAP_ANCHOR_BOTTOM_LEFT
+        });
+        scaleControl.setUnit(BMAP_UNIT_IMPERIAL);
+        map.addControl(scaleControl);
+        var navControl = new BMap.NavigationControl({
+            anchor: BMAP_ANCHOR_TOP_LEFT,
+            type: BMAP_NAVIGATION_CONTROL_LARGE
+        });
+        map.addControl(navControl);
+        var overviewControl = new BMap.OverviewMapControl({
+            anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
+            isOpen: true
+        });
+        map.addControl(overviewControl);
+    }
+    var map;
+    initMap();
+</script>
+
+{/block}

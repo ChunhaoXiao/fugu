@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{if !empty($title)} {$title.'-'} {/if}  {:cache('config')['title']}</title>
+	<link rel="stylesheet" type="text/css" href="/front/style/animation.css">
+	<link rel="stylesheet" type="text/css" href="/front/style/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/front/style/global.css">
+	<link rel="stylesheet" type="text/css" href="/front/style/index.css">
+	<link rel="stylesheet" type="text/css" href="/front/style/reset.css">
+	<link rel="stylesheet" type="text/css" href="/front/style/swiper.min.css">
+	<meta name="viewport"  content="width=device-width,user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
+
+	<link rel="stylesheet" type="text/css" href="/front/slick/slick.css">
+	<link rel="stylesheet" type="text/css" href="/front/slick/slick-theme.css">
+
+	<link rel="stylesheet" href="/front/lightbox/lightbox.min.css">
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+
+	<meta name="description" content="{:cache('config')['description']}">
+    <meta name="Keywords" content="{:cache('config')['keyword']}">
+    <script type="text/javascript" src="/front/script/jquery-1.11.1.min.js"></script>
+    <link rel="Shortcut Icon" href="./assets/images/favicon.ico" />
+</head>
+<body class="bodyhomes">
+
+<div class="header_bar clearfix"><!--nav-->
+	<div class="navicon"></div>
+	<div class="inner">
+		<div class="header_logo"><a href="/"><img src="/uploads/{:cache('config')['logo']}" alt=""></a></div>
+
+		<div class="header_nav clearfix">
+			<div class="header_navbar clearfix">  
+				<ul>
+					<li {if strtolower(request()->controller()) == 'index'} class="active" {/if}>
+						
+						<a href="{:url('index/index/index')}" >{:lang('index')}</a>
+						
+					</li>
+					{php} $navs = app\common\model\Category::top()->with('subcates')->select();{/php}
+
+					{foreach $navs as $v}
+						<li style="text-align: center;" {if $v->is_current()} class="active" {/if}>
+							<a href="{:url('index/'.$v->url)}" style="min-width: 120px">{$v->lang}</a>
+							{if $v->subcates && $v->type=="about"}
+							<div class="header_slider">
+								{foreach $v->subcates as $k => $v1}
+									<a href="{:url($v->url, ['index' => $k])}">
+										{$v1->lang}
+									</a>
+								{/foreach}
+							</div>
+						    {/if}
+
+						    {if $v->subcates && $v->type == "business"}
+						    	<div class="header_slider">
+								{foreach $v->subcates as $k => $v1}
+									<a href="{:url($v->url, ['i' => $k])}">
+										{$v1->lang}
+									</a>
+								{/foreach}
+							    </div>
+						    {/if}
+
+						    {if $v->subcates && ($v->type=='product' || $v->type == 'news')}
+						    	<div class="header_slider">
+								{foreach $v->subcates as $k => $v1}
+									<a href="{:url($v->url, ['category_id' => $v1->id])}">
+										{$v1->lang}
+									</a>
+								{/foreach}
+							    </div>
+						    {/if}
+						</li>
+
+						
+					{/foreach}
+					<!-- <li>
+						<a href="###">关于我们</a>
+						<div class="header_slider">
+							<a href="###">董事长致辞</a>
+							<a href="###">公司介绍</a>
+							<a href="###">发展历程</a>
+							<a href="###">企业文化</a>
+							<a href="###">核心价值</a>
+							<a href="###">资质荣誉</a>
+							<a href="###">企业视频</a>
+						</div>
+					</li>
+					<li><a href="###">主要产业</a></li>
+					<li><a href="###">产品中心</a></li>
+					<li><a href="###">新闻中心</a></li>
+					<li><a href="###">招商加盟</a></li>
+					<li><a href="###">人力资源</a></li>
+					<li><a href="###">联系我们</a></li> -->
+				</ul>
+			</div>
+
+			<div class="header_form" style="">
+				<div class="sousuobtn">
+					<form action="{:url('index/search/index')}"><input type="text"  name="keyword" placeholder="请输入关键词" /><a href="javascript:void()" class="sous_btn"></a>  <button type="submit"></button>
+					</form>
+				</div>
+				
+				<div class="Language">
+
+					{if cookie('think_var') == 'zh-cn' || empty(cookie('think_var'))}
+				    <a id="lang" href="javascript:;" data-lang="en-us">EN</a>
+				    {else /}
+				    	<a id="lang" href="javascript:;" data-lang="zh-cn">CN</a>
+				    {/if}
+			    </div>
+
+			</div>
+		</div>
+	</div>
+</div>
+{block name="content"}
+	
+{/block}
+
+<!--footer-->
+<div class="footer">
+	<div class="footer_bwiner clearfix">
+		<div class="inner clearfix">
+			<div class="foot_logo">
+				{if !empty(cache('config')['bottom_logo'])}
+				<img src="/uploads/{:cache('config')['bottom_logo']}" alt="">
+				{/if}
+			</div>
+			<div class="footnavs clearfix">                                           
+				<ul>
+					{php}
+						$contact = app\common\model\Contact::find();
+					{/php}
+
+					{foreach :cache('navs') as $v}
+					<li>
+						<h3>{$v->lang}</h3>
+						{if $v->subcates}
+							{foreach $v->subcates as $k => $sub}
+							<a 
+							    {if $v->type == 'about'} 
+								    href="{:url('index/about/index', ['index' => $k])}" 
+								{elseif $v->type =="business" /} 
+								    href="{:url('index/business/index', ['i' => $k])}" 
+								{elseif $v->type=="product" /}
+								    href="{:url('index/product/index', ['category_id' => $sub->id])}" 
+								{elseif $v->type=='news'} 
+								    href="{:url('index/news/index', ['category_id' => $sub->id])}" 
+								{elseif $v->type == 'hr'} href="{:url('index/hr/index')}" 
+
+							    {/if}>
+							    {$sub->lang}
+						    </a>
+							
+							{/foreach}
+						{/if}
+
+						
+						{if $v->type == 'contact'}
+							<div class="contact-us" style="">
+							<span href="javascript:;" style="margin-top: 18px;">{$contact->name_lang}</span>
+							<span href="javascript:;">{:lang('phone')}：{$contact->phone}</span>
+							<span href="javascript:;">{:lang('post_code')}：{$contact->post_code}</span>
+							<span href="javascript:;">{:lang('website')}：{$contact->web_site}</span>
+							<span href="javascript:;">{:lang('address')}：{$contact->address_lang}</span>	
+						    </div>
+						{/if}
+					</li>
+					{/foreach}
+
+					
+				</ul>
+			</div>
+		</div>
+
+		<div class="copyright">
+			<div class="">
+				<p>{:cache('config')['copy_right']}　</p>
+				<div style="text-align: center; padding-bottom: 5px">{:cache('config')['lisence']}</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+<script type="text/javascript" src="/front/script/global.js"></script>
+<script type="text/javascript" src="/front/script/index.js"></script>
+<script type="text/javascript" src="/front/script/swiper.min.js"></script>
+<script type="text/javascript" src="/front/script/TouchSlide.1.1.js"></script>
+<script src="/front/lightbox/lightbox.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		
+
+		$("#lang").click(function(){
+			let lang = $(this).data('lang');
+			$.ajax({
+				url:"{:url('index/lang/update')}",
+				data:{lang:lang},
+				type:'post',
+				success:res => {
+					location.reload();
+				}
+			});
+		});
+	})
+</script>
+{block name="script"}
+	
+{/block}
+</body>
+</html>

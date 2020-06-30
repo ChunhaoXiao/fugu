@@ -1,0 +1,36 @@
+{extend name="common/list" /}
+{block name="action"}
+	<button class="layui-btn" onclick="xadmin.open('添加栏目','/admin/category/create',600,400)"><i class="layui-icon"></i>添加</button>
+{/block}
+{block name="content"}
+	<table class="layui-table layui-form">
+		<thead>
+			<th>栏目名称</th>
+			
+			<th>图标</th>
+			<th>背景图</th>
+			<th>链接</th>
+			<th>排序</th>
+			<th></th>
+		</thead>
+		<tbody>
+			{foreach $datas as $v}
+				<tr>
+					<td {if $v->parent_id == 0} style="font-weight:800" {/if}>{$v->name}</td>
+					<td>{if !empty($v->icon)}<img src="/uploads/{$v->icon}" width="40" height="40">{/if}</td>
+					<td>{if $v->bg_image}<img src="/uploads/{$v->bg_image}" width="100" height="50">{/if}</td>
+					<td>{$v->url}</td>
+					<td>{$v->order}</td>
+					<td>
+						<a title="编辑"  onclick="xadmin.open('编辑','/admin/category/edit?id={$v->id}')" href="javascript:;">
+                                  <i class="layui-icon">&#xe642;</i>
+                        </a>
+                        <a title="删除" onclick="del(this)" href="javascript:;" data-url="{:url('admin/category/delete', ['id' => $v->id])}">
+                          <i class="layui-icon">&#xe640;</i>
+                        </a>
+					</td>
+				</tr>
+			{/foreach}
+		</tbody>
+	</table>
+{/block}

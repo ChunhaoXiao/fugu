@@ -1,0 +1,45 @@
+{extend name="common/form"}
+
+{block name="content"}
+
+	<form class="layui-form" enctype="multipart/form-data" action="{:url('admin/config/save')}" method="post">
+
+    {foreach :config('configration.') as $k=> $item}
+		<div class="layui-form-item">
+      <label for="username" class="layui-form-label">
+          <span class="x-red"></span>{$item['label']}
+      </label>
+
+      <div class="layui-input-block">
+        {if $item['type'] == 'text'}
+          <input type="text" name="{$item['name']}" class="layui-input" value="{$data[$item['name']]??''}">
+        {elseif $item['type'] == 'file'}
+          <input type="file" name="{$item['name']}" class="layui-input">
+          {if !empty($data[$item['name']])}
+            <img src="/uploads/{$data[$item['name']]}" width="50" height="50">
+          {/if}
+        {elseif $item['type'] == 'radio'}
+          <div class="custom-radio">
+          {foreach $item['options'] as $v}
+            
+              <span>{$v['label']}</span>
+              <input type="radio" {if isset($data[$item['name']]) && $data[$item['name']] == $v['value']} checked {else /} {if $item['default'] == $v['value']} checked  {/if} {/if} name="{$item['name']}" value="{$v['value']}">
+          {/foreach}
+          </div>
+        {/if}
+      </div>
+    </div>
+    {/foreach}
+
+
+    <div class="layui-form-item">
+        <label for="L_repass" class="layui-form-label"></label>
+        <button class="layui-btn"  type="submit">确定</button>
+        {if !empty(session('success'))} 
+          <span style="color:green">
+            操作成功
+          </span>
+        {/if}
+    </div>
+	</form>
+{/block}

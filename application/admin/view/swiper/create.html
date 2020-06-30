@@ -1,0 +1,44 @@
+{extend name="common/form"}
+{block name="content"}
+
+	<form class="layui-form" enctype="multipart/form-data" action="{:empty($data)?url('admin/swiper/save'):url('admin/swiper/update', ['id'=> $data->id])}">
+		    <div class="layui-form-item">
+          <label for="username" class="layui-form-label">
+              <span class="x-red">*</span>轮播图片
+          </label>
+
+          <div class="layui-input-inline">
+              <input type="file"  name="path"  class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label for="username" class="layui-form-label">
+              <span class="x-red"></span>显示顺序
+          </label>
+          <div class="layui-input-inline">
+              <input type="text"  name="order" required="" 
+              autocomplete="off" class="layui-input" value="{$data->order??0}">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <label for="username" class="layui-form-label">
+              <span class="x-red"></span>是否启用
+          </label>
+          <div class="layui-input-inline">
+              <div class="custom-radio">
+                  <span>显示</span>
+                  <input type="radio" name="is_show" value="1" checked>
+                  <span>不显示</span>
+                  <input type="radio" name="is_show" value="0">
+              </div>
+          </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_repass" class="layui-form-label"></label>
+            <button class="layui-btn" lay-filter="add" type="button" lay-submit="">增加</button>
+        </div>
+	</form>
+
+
+{/block}

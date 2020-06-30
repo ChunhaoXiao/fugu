@@ -1,0 +1,158 @@
+{extend name="layout"} {block name="content"}
+<style type="text/css">
+    p.MsoNormal {
+        padding: 1px;
+        margin: 5px;
+    }
+</style>
+<div class="banner_gy" style="background-image: url(/uploads/{:cache('banner')['about']})">
+    <div class="logo2"> <img src="/uploads/{:cache('config')['logo']??''}" alt=""></div>
+    <div class="bangywzhi">
+        <h3>关于我们</h3>
+        <p>ABOUT US</p>
+    </div>
+</div>
+{php} $index = request()->index??0; {/php}
+<div class="Gyuscenter">
+    <div class="Mainbnav">
+        <div class="inner">
+            <a href="{:url('index/index/index')}">{:lang('index')}></a>
+            <a href="{:url('index/about/index')}">{:lang('about')}></a>
+            <a href="javascript:;" id="nav_text">{$datas->subcates[$index]->lang}</a>
+
+
+            </a>
+        </div>
+    </div>
+    <div class="Gyfullpages">
+        <div class="inner clearfix">
+            <div class="Gstitle_bar">
+                {foreach $datas->subcates as $k => $v}
+                <div class="Gstitle {if $k == $index} active {/if}">
+                    <div class="Titlebars">
+                        <p class="lfish"><img src="/assets/images/left_fish.png"></p>
+                        <h3>{if $k == 0 && cookie('think_var') == 'zh-cn'}关于富谷{else /}{$v->lang}{/if}</h3>
+                        <p class="rfish"><img src="/assets/images/right_fish.png"></p>
+                    </div>
+                </div>
+                {/foreach}
+
+
+                <div class="Gslistnav_pr">
+                    <div class="Gslistnav Gslistnav_1 clearfix">
+                        <ul>
+                            {foreach $datas->subcates as $k => $v}
+                            <li class="{$index == $k?  'active' : ''}"><a href="javascript:;">{$v->lang}</a></li>
+
+                            {/foreach}
+
+                        </ul>
+                    </div>
+
+                    <div class="Gslistnav_huan">
+                        <!-- 内容区 -->
+                        {foreach $datas->subcates as $k => $v}
+
+                        <div class="Gslistnav_items  clearfix {if $k == $index} active {/if}">
+
+                            <div class="Gsjieahso_1">
+                                <!--如果是企业荣誉-->
+                                {if $v->identifier == 'honor'}
+                                <div class="ryimgbanks clearfix">
+
+                                    <ul>
+                                        {foreach :explode(',', $v->aboutus->content) as $v}
+                                        <li>
+                                            <a href="/uploads/{$v}" data-lightbox="roadtrip"><img src="/uploads/{$v}" alt=""></a>
+                                        </li>
+                                        {/foreach}
+                                    </ul>
+                                </div>
+                                {else /}
+
+                                <div {if $v->identifier == 'video'} style="text-align: center;" {/if}>
+                                    <div class="Gyplay_imgddd">
+                                        <!--如果是企业文化-->
+                                        {if $v->identifier == 'culture'}
+                                        <div class="Whuatext clearfix">
+                                            <ul>
+                                                {foreach $v->aboutus->culture[0] as $k => $v1}
+                                                <li {if $k==0 } class="left" {/if}>
+                                                    <div class="whuabanks">
+                                                        <h3>{$v1['title']}</h3>
+                                                        {foreach $v1['contents'] as $v2}
+                                                        <p>{$v2}</p>
+                                                        {/foreach}
+                                                    </div>
+                                                </li>
+                                                {/foreach}
+                                            </ul>
+                                        </div>
+
+                                        <div class="whuaimg"><img src="/uploads/{$v->aboutus->culture['picture']}" alt=""></div>
+                                        <div class="whauygang">
+                                            <div class="Ygangtext">
+                                                <h3>
+                                                    <!--文化纲要-->{:lang('outline')}</h3>
+                                                {php} $outlines = $v->aboutus->culture[1]; {/php}
+                                            </div>
+                                            <div class="Ygangroup clearfix">
+                                                <div class="Yganitems">
+                                                    <ul>
+                                                        {foreach :array_slice($outlines,0,7) as $v}
+                                                        <li>
+                                                            <h3>{$v['title']}</h3>
+                                                            {foreach $v['contents'] as $v1}
+                                                            <p>{$v1}</p>
+                                                            {/foreach}
+                                                        </li>
+                                                        {/foreach}
+                                                    </ul>
+                                                </div>
+                                                <div class="Yganitems">
+                                                    <ul>
+                                                        {foreach :array_slice($outlines,7) as $v}
+                                                        <li>
+                                                            <h3>{$v['title']}</h3>
+                                                            {foreach $v['contents'] as $v1}
+                                                            <p>{$v1}</p>
+                                                            {/foreach}
+
+                                                        </li>
+                                                        {/foreach}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {else /}
+                                        <!--如果是其它的内容-->
+
+                                        {$v->aboutus->lang_con|raw} {/if}
+                                    </div>
+                                </div>
+                                {/if}
+                            </div>
+                        </div>
+                        {/foreach}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {/block} {block name="script"}
+    <script>
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'positionFromTop': 200,
+        })
+
+        $(function() {
+            $(".Gslistnav li").on('click', function() {
+                let text = $(this).find('a').text();
+                $("#nav_text").text(text);
+            })
+
+        })
+    </script>
+    {/block}

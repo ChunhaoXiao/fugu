@@ -1,0 +1,368 @@
+<!doctype html>
+<html class="x-admin-sm">
+    <head>
+        <meta charset="UTF-8">
+        <title>后台登录-X-admin2.2</title>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+        <link rel="stylesheet" href="/assets/css/font.css">
+        <link rel="stylesheet" href="/assets/css/xadmin.css">
+        <link rel="stylesheet" href="/assets/summernote/summernote-lite.css">
+        
+        <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+        <script src="/assets/lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="/assets/js/xadmin.js"></script>
+
+        
+         <script type="text/javascript" src="/assets/summernote/summernote-lite.js"></script>
+        <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+        <!--[if lt IE 9]>
+          <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+          <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script>
+            // 是否开启刷新记忆tab功能
+            // var is_remember = false;
+        </script>
+    </head>
+
+    <body>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                {block name="content"}{/block}
+            </div>
+        </div>
+
+
+
+        <script>
+            layui.use(['form', 'layer', 'layedit'],
+            function() {
+                $ = layui.jquery;
+                var form = layui.form,
+                layer = layui.layer;
+                var layedit = layui.layedit;
+
+                $('#content').summernote({
+                    height: 250, 
+
+                    lineHeight:15,
+                    code: '<text H>',
+                    callbacks:{
+                        onImageUpload: function(image) 
+                        {
+                            uploadImage(image[0],'zh');
+                        },
+
+                        onPaste: function (e) {
+                            var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                            e.preventDefault();
+                            document.execCommand('insertText', false, bufferText);
+                        }
+                    }
+                });
+
+                $("#en_content").summernote({
+                    height:250,
+                    lineHeight:15,
+                    code: '<text H>',
+                    callbacks:{
+                        onImageUpload: function(image) 
+                        {
+                            uploadImage(image[0], "en");
+                        },
+
+                        onPaste: function (e) {
+                            var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                            e.preventDefault();
+                            document.execCommand('insertText', false, bufferText);
+                        }
+                    }
+                })
+
+
+                function uploadImage(image, type) {
+                    var data = new FormData();
+                    data.append("file", image);
+                    $.ajax({
+                        url: "{:url('admin/file_upload/upfile')}",
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        type: "post",
+                        success: function(url) {
+                            console.log(url)
+                            const imgPath = url.data.src;
+                            console.log(imgPath)
+                            var image = $('<img>').attr('src', imgPath);
+                            if(type == 'zh')
+                            {
+                                $('#content').summernote("insertNode", image[0]);
+                            }
+                            else
+                            {
+                                $('#en_content').summernote("insertNode", image[0]);
+                            }
+                            
+                        },
+                        error: function(data) {
+                            console.log(data);
+                        }
+                    });
+                }
+
+
+
+                layedit.set({
+                //暴露layupload参数设置接口 --详细查看layupload参数说明
+                uploadImage: {
+                    url: "{:url('admin/file_upload/upfile')}",
+                    accept: 'image',
+                    acceptMime: 'image/*',
+                    exts: 'jpg|png|gif|bmp|jpeg',
+                    size: '10240'
+                }
+                , uploadVideo: {
+                    url: "{:url('admin/file_upload/upfile')}",
+                    accept: 'video',
+                    acceptMime: 'video/*',
+                    exts: 'mp4|flv|avi|rm|rmvb',
+                    size: '100480'
+                }
+                //右键删除图片/视频时的回调参数，post到后台删除服务器文件等操作，
+                //传递参数：
+                //图片： imgpath --图片路径
+                //视频： filepath --视频路径 imgpath --封面路径
+                , calldel: {
+                    url: '/Attachment/DeleteFile'
+                }
+                //开发者模式 --默认为false
+                , devmode: true
+                //插入代码设置
+                , codeConfig: {
+                    hide: true,  //是否显示编码语言选择框
+                    default: 'javascript' //hide为true时的默认语言格式
+                }
+                , tool: [
+                    'html', 'code', 'strong', 'italic', 'underline', 'del', 'addhr', '|', 'fontFomatt', 'colorpicker', 'face'
+                    , '|', 'left', 'center', 'right', '|', 'link', 'unlink','images', 'image_alt', 'video', 'anchors'
+                    , '|','table', 'fullScreen'
+                ]
+                , height: '400px'
+            });
+                var ieditor = layedit.build('contentsss');
+                var en_editor = layedit.build('en_contentsss');
+
+
+
+                //自定义验证规则
+                // form.verify({
+                //     nikename: function(value) {
+                //         if (value.length < 5) {
+                //             return '昵称至少得5个字符啊';
+                //         }
+                //     },
+                //     pass: [/(.+){6,12}$/, '密码必须6到12位'],
+                //     repass: function(value) {
+                //         if ($('#L_pass').val() != $('#L_repass').val()) {
+                //             return '两次密码不一致';
+                //         }
+                //     }
+                // });
+                
+
+                form.on('select(category)', function(data){
+                    let option = $(data.elem).find("option:selected").text();
+                   if(option == '荣誉资质')
+                   {
+                        $("#picture_area").show().siblings().hide();
+                   }
+                   else if(option == '企业文化'){
+                       $("#about_area").show().siblings().hide();
+                   }
+                   else{
+                     $("#content-area").show().siblings().hide();
+                   }
+
+                })
+                //layui.event.call('select(category)','form','select(category)')
+                //$('select[name="category"').siblings("div.layui-form-select").find('dl dd[lay-value=' + 'category' + ']').click();
+
+                //监听提交
+                form.on('submit(add)',
+                function(data) {
+                    const url = data.form.action; //请求的url
+                    let formData = new FormData($(".layui-form")[0]);//
+                 
+                    //let con  = formData.getAll("content");
+                    //let albums = formData.getAll('album');
+                    let honor = $("input[name=content]").val();
+                    //console.log('honor', honor)
+                    let culture = $("textarea[name=culturea]").val()
+                    let con = '';
+
+                    if(honor)
+                    {
+                    	console.log('honor')
+                        console.log(honor);
+                    	let res = [];
+                    	$("input[name=content]").each(function(item, v){
+                    		con += con? ','+$(v).val(): $(v).val();
+                    	})
+                    }
+                    else if(culture)
+                    {
+                    	console.log('culture')
+                    	//console.log(culture)
+                    	//con = culture.toString();
+
+                        let picture = '';
+                        if($("#about_area").find("input[name=picture]").val())
+                        {
+                            picture = $("#about_area").find("input[name=picture]").val();
+                            console.log(picture)
+                        }
+                    	con = $("textarea[name=culturea]").val() +'|#|'+ $("textarea[name=cultureb]").val()+'|#|'+picture;
+                        //console.log(con);
+                    
+                    }
+                    else 
+                    {
+                    	console.log('content')
+                    	con = $('#content').summernote('code')
+                    }
+
+                    //return false;
+        
+                    // if(honor === undefined)
+                    // {
+                    // 	//con = layedit.getContent(ieditor) ;
+                    //     con = $("#content").val();
+                    // }
+                    // else
+                    // {
+                    // 	//let con = '';
+                    // 	let res = [];
+                    // 	$("input[name=content]").each(function(item, v){
+                    // 		con += con? ','+$(v).val(): $(v).val();
+                    // 	})
+                    	
+                    // }
+
+
+                    //let con = layedit.getContent(ieditor) ;
+                    //console.log('con',con);
+                    //let con2 =  $("input[name=content]");
+                    //console.log(con2.val());
+                    //return ;
+                   	let photo = $("input[name=album]").val();
+                   	let albums = '';
+                   	if(photo)
+                   	{
+                   		$("input[name=album]").each(function(k,v){
+                   			albums += albums? ',' + $(v).val():$(v).val();
+                   		})
+                   	}
+                   	
+
+                   	//产品相册
+
+                    //albums = albums.length > 0 ? albums.toString():'';
+                    formData.append('album', albums);
+                    
+                    // if(con.length  ==  0)
+                    // {
+                    //     //alert('has not content');
+                    //     formData.append('content', layedit.getContent(ieditor));
+                    // }
+                    // else{
+                    //     formData.append('content', con.toString())
+                    // }
+                    formData.append('content', con);
+                    
+                    //console.log('encontent:',$('#en_content').summernote('code'));
+                    //return;
+                    let en_contents;
+                    if(culture)
+                    {
+                        let picture = '';
+                        if($("#about_area").find("input[name=picture]").val())
+                        {
+                            picture = $("#about_area").find("input[name=en_picture]").val();
+                            console.log(picture)
+                        }
+
+                        en_contents =  $("textarea[name=en_culturea]").val() +'|#|'+ $("textarea[name=en_cultureb]").val() + '|#|'+ picture;
+                    }
+                    else
+                    {
+                        en_contents = $('#en_content').summernote('code');
+                    }
+                    
+
+                    //console.log(en_contents);
+                
+                    formData.append('en_content', en_contents)
+                   //console.log(formData.get('content'))
+
+                    $.ajax({
+                    type:'post',
+                    dataType:'json',
+                    //data:data.field,
+                    data:formData,
+                    url:url,
+                    async:false,
+                    contentType:false,
+                    processData:false,
+                    success:function(data){
+                        if(data.code == 1){
+                            //发异步，把数据提交给php
+                            layer.alert("增加成功", {icon: 6},function () {
+                                // 获得frame索引
+                                var index = parent.layer.getFrameIndex(window.name);
+                                //关闭当前frame
+                                parent.layer.close(index);
+                                //添加成功刷新页面
+                                parent.location.reload();
+                            });
+                        }else{
+                            //发异步，把数据提交给php
+                            console.log(data)
+                            layer.alert(data.error, {icon: 5},function () {
+                                // 获得frame索引
+                                var index = parent.layer.getFrameIndex(window.name);
+                                //关闭当前frame
+                                parent.layer.close(index);
+                                //添加失败刷新页面
+                                //parent.location.reload();
+                            });
+                        }
+                    },
+                  });
+                    return false;
+                    // console.log(data);
+                    // //发异步，把数据提交给php
+                    // layer.alert("增加成功", {
+                    //     icon: 6
+                    // },
+                    // function() {
+                    //     // 获得frame索引
+                    //     var index = parent.layer.getFrameIndex(window.name);
+                    //     //关闭当前frame
+                    //     parent.layer.close(index);
+                    // });
+                    // return false;
+                });
+
+
+
+                
+
+            });
+        </script>
+    </body>    
+</html>

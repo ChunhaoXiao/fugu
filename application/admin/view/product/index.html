@@ -1,0 +1,42 @@
+{extend name="common/list" /}
+{block name="action"}
+	<button class="layui-btn" onclick="xadmin.open('添加业务','/admin/product/create',800,600)"><i class="layui-icon"></i>添加</button>
+{/block}
+
+{block name="content"}
+	<table class="layui-table layui-form">
+		<thead>
+			<th>图片</th>
+			<th>名称</th>
+			<th>分类</th>
+			<th>推荐</th>
+
+			<th>修改时间</th>
+			<th>
+				操作
+			</th>
+		</thead>
+		<tbody>
+			{foreach $datas as $v}
+				<tr>
+					<td><img src="/uploads/{$v->cover}" width="40" height="40"></td>
+					<td>{$v->name}</td>
+					<td>{$v->category->name}</td>
+					<td>{$v->is_recommend?'是':'否'}</td>
+
+					<td>{$v->update_time}</td>
+					<td>
+						<a title="编辑"  onclick="xadmin.open('修改','/admin/product/edit?id={$v->id}',600,400)" href="javascript:;">
+                        <i class="layui-icon">&#xe642;</i>
+                        </a>
+                        	&nbsp;&nbsp;&nbsp;
+                        <a title="删除" onclick="del(this)" href="javascript:;" data-url="{:url('admin/product/delete', ['id' => $v->id])}">
+                          <i class="layui-icon">&#xe640;</i>
+                        </a>
+					</td>
+				</tr>
+			{/foreach}
+		</tbody>
+	</table>
+	<p>{$datas|raw}</p>
+{/block}
